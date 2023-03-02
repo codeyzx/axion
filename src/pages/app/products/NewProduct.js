@@ -87,11 +87,11 @@ function NewProduct() {
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </Link>
 
         <div className="contentContainer">
-          <h1 className="pageName mb-6">Products Baru</h1>
+          <h1 className="pageName mb-6">New Product</h1>
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(submitHandler)}
@@ -169,7 +169,7 @@ function NewProduct() {
                       alt="img placeholder"
                       className="w-32"
                     />
-                    <h5 className="text-sm font-medium">Tambah Image</h5>
+                    <h5 className="text-sm font-medium">Add Image</h5>
                   </>
                 )}
               </div>
@@ -190,7 +190,7 @@ function NewProduct() {
                   loading && "opacity-75 hover:bg-white"
                 } `}
               >
-                Batalkan
+                Cancel
               </button>
               <button
                 type="submit"
@@ -199,7 +199,7 @@ function NewProduct() {
                   loading && "opacity-75 hover:bg-purple-600"
                 }`}
               >
-                Simpan Products
+                Save Products
               </button>
             </div>
           </form>

@@ -50,7 +50,7 @@ function Cart() {
             onClick={() => navigate(-1)}
           >
             <Icon icon="charm:chevron-left" width={20} />
-            Kembali Ke Toko
+            Back Ke Toko
           </button>
         )}
         {cart.length > 0 ? (
@@ -112,7 +112,7 @@ function Cart() {
               className="font-medium text-lg py-2 px-16 hover:bg-purple-700 rounded mt-4 bg-purple-600 text-white"
               onClick={() => navigate(-1)}
             >
-              Kembali
+              Back
             </button>
           </div>
         )}

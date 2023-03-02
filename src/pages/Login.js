@@ -45,6 +45,8 @@ function Login() {
         });
         if (tokenReq.data["user"]["role"] === "Admin") {
           navigate("/admin/home");
+        } else if (tokenReq.data["user"]["role"] === "Operator") {
+          navigate("/operator/home");
         } else {
           navigate("/app/home");
         }
@@ -117,7 +119,7 @@ function Login() {
       </nav>
       <div className="flex px-4 lg:px-0 justify-center mt-6 flex-col max-w-sm mx-auto">
         <h1 className="text-3xl font-semibold text-center">
-          Selamat Datang Kembali!
+          Selamat Datang Back!
         </h1>
 
         {/* Form Login Biasa */}

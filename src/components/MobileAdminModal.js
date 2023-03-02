@@ -40,10 +40,14 @@ function MobileAdminModal() {
   const [isOpen, setIsOpen] = useRecoilState(navbarAdmin);
   const locationNow = useLocation();
   const nav = useNavigate()
+  const navigate = useNavigate();
 
   const logoutHandler = async () => {
     try {
-      signOut(auth);
+      // signOut(auth);
+
+      localStorage.clear();
+      navigate("/login");
     } catch (err) {
       console.error(err);
     }

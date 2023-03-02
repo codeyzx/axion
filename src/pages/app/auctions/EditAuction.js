@@ -40,7 +40,7 @@ function EditAuction() {
         console.log(err);
         if (err.response.status === 404) {
           console.error("Auction doesnt exist");
-          navigate("/admin/auctions");
+          navigate("/" + user.role.toLowerCase() + "/auctions");
           return;
         }
       });
@@ -56,7 +56,7 @@ function EditAuction() {
   //       console.log(err);
   //       if (err.response.status === 404) {
   //         console.error("Product doesnt exist");
-  //         navigate("/admin/auctions");
+  //         navigate("/"+user.role.toLowerCase()+"/auctions");
   //         return;
   //       }
   //     });
@@ -118,7 +118,7 @@ function EditAuction() {
     try {
       await deleteRequest("auctions/" + id, token);
       toast.success("Data Berhasil Dihapus");
-      navigate("/admin/auctions");
+      navigate("/" + user.role.toLowerCase() + "/auctions");
     } catch (err) {
       console.error(err);
       toast.error("Terjadi Kesalahan");
@@ -136,11 +136,11 @@ function EditAuction() {
 
       <div className="layoutContainer min-h-screen">
         <button
-          onClick={() => navigate("/admin/auctions")}
+          onClick={() => navigate("/" + user.role.toLowerCase() + "/auctions")}
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </button>
 
         <div className="contentContainer">
@@ -256,12 +256,14 @@ function EditAuction() {
                   <button
                     type="button"
                     disabled={loading || !isChange}
-                    onClick={() => navigate("/admin/auctions")}
+                    onClick={() =>
+                      navigate("/" + user.role.toLowerCase() + "/auctions")
+                    }
                     className={`batalkanBtn ${
                       (loading || !isChange) && "opacity-75 hover:bg-white"
                     } `}
                   >
-                    Batalkan
+                    Cancel
                   </button>
                   <button
                     type="submit"
@@ -270,7 +272,7 @@ function EditAuction() {
                       (loading || !isChange) && "opacity-75 hover:bg-purple-600"
                     }`}
                   >
-                    Simpan Product
+                    Save Product
                   </button>
                 </div>
               </form>

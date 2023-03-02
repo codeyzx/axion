@@ -56,7 +56,7 @@ function NewCustomer() {
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </Link>
 
         <div className="contentContainer">
@@ -139,7 +139,7 @@ function NewCustomer() {
                 onClick={() => navigate("/app/customers")}
                 disabled={loading}
               >
-                Batalkan
+                Cancel
               </button>
               <button
                 type="submit"
@@ -148,7 +148,7 @@ function NewCustomer() {
                   loading && "opacity-75 hover:bg-purple-600"
                 }`}
               >
-                Simpan Kustomer
+                Save Kustomer
               </button>
             </div>
           </form>

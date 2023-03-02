@@ -476,7 +476,7 @@ function Setting() {
                     (loading || !isChange) && "opacity-75 hover:bg-purple-600"
                   }`}
                 >
-                  {!loading ? <>Simpan Perubahan</> : <>Menyimpan...</>}
+                  {!loading ? <>Save Perubahan</> : <>Menyimpan...</>}
                 </button>
               </div>
             </form>

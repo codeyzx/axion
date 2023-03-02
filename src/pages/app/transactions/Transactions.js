@@ -1,3 +1,4 @@
+import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -8,7 +9,7 @@ import { userState } from "../../../atoms/userAtom";
 import EmptyTable from "../../../components/EmptyTable";
 import NavbarAdmin from "../../../components/NavbarAdmin";
 import Table from "../../../components/Table";
-import { getRequest } from "../../../configs/axios";
+import { downloadRequest, getRequest } from "../../../configs/axios";
 import rupiahConverter from "../../../helpers/rupiahConverter";
 
 function Transactions() {
@@ -16,6 +17,36 @@ function Transactions() {
   const [filterInput, setFilterInput] = useState("");
   const [transactions, setTransactions] = useState(false);
   const token = useRecoilValue(authToken);
+
+  const downloadPDF = async () => {
+    const response = await downloadRequest(
+      "auction-histories-export-pdf",
+      token
+    );
+    const blob = new Blob([response.data]);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "transaction-report.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadExcel = async () => {
+    const response = await downloadRequest(
+      "auction-histories-export-excel",
+      token
+    );
+    const blob = new Blob([response.data]);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "transaction-report.xlsx";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const getTransactions = async () => {
     await getRequest("auction-histories", token)
@@ -51,14 +82,14 @@ function Transactions() {
         ),
       },
       {
-        Header: "User Name",
+        Header: "User",
         accessor: "user_name",
         Cell: ({ cell: { value } }) => (
           <p className={`max-w-[160px]`}>{value}</p>
         ),
       },
       {
-        Header: "Harga",
+        Header: "Price",
         accessor: "price",
         Cell: ({ cell: { value } }) => (
           <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
@@ -88,21 +119,56 @@ function Transactions() {
           </Link>
         </div>
         <div className="contentContainer">
-          <h5 className="font-semibold">
-            Total Transaction: {transactions?.length}
-          </h5>
-          {/* Search Bar & Filter Nanti */}
+          <div className="flex flex-row justify-between">
+            <h5 className="font-semibold">
+              Total Transaction: {transactions?.length}
+            </h5>
+            <Menu className="relative" as="div">
+              <Menu.Button className="flex hover:scale-105 transition-all ease-out duration-100 p-[2px] items-center gap-2 cursor-pointer w-full">
+                <Icon
+                  icon="material-symbols:more-vert"
+                  width="30"
+                  height="30"
+                />
+              </Menu.Button>
+              <Menu.Items className="absolute right-0 flex flex-col py-2 rounded bg-white gap-[2px] mt-1 w-40 shadowProfile text-sm font-medium z-10">
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={` px-3 py-[6px] flex gap-2  ${
+                        active && "bg-gray-100 text-red-500"
+                      }`}
+                      onClick={downloadPDF}
+                    >
+                      <Icon icon="eos-icons:role-binding" width="18" />
+                      <p className="font-medium">Export to PDF</p>
+                    </button>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={` px-3 py-[6px] flex gap-2  ${
+                        active && "bg-gray-100 text-red-500"
+                      }`}
+                      onClick={downloadExcel}
+                    >
+                      <Icon icon="eos-icons:role-binding" width="18" />
+                      <p className="font-medium">Export to Excel</p>
+                    </button>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
+          </div>
           <div className="flex w-full my-2">
             <input
               type="text"
-              placeholder="Cari Transaction"
+              placeholder="Search Transaction"
               onChange={handleFilterChange}
               value={filterInput}
               className="w-full focus:border-purple-600 text-sm outline-none border-[1px] border-gray-300 transition-all duration-300 ease-out  rounded p-2"
             />
-            {/* <button>
-              Cari
-            </button> */}
           </div>
 
           {/* Kalo Loading */}

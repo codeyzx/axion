@@ -2,52 +2,16 @@ import { Icon } from "@iconify/react";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useOutletContext,
-} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../atoms/userAtom";
 import NavbarAdmin from "../../components/NavbarAdmin";
-import VerificationReminder from "../../components/VerificationReminder";
 import { toast } from "react-toastify";
-import StatistikAngka from "../../components/StatistikAngka";
-import { SalesChart } from "../../components/SalesChart";
-import TopProduct from "../../components/TopProduct";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { firestoreDb } from "../../firebase";
-import { useState } from "react";
-
-const products = [
-  {
-    name: "Nike Air Jordan 1 Mid",
-    sold: 23,
-  },
-  {
-    name: "Swallow Indomaret",
-    sold: 20,
-  },
-  {
-    name: "A Bathing Ape",
-    sold: 18,
-  },
-  {
-    name: "Kaos Catur Bekasi",
-    sold: 14,
-  },
-  {
-    name: "Jaket Jamet Yoru",
-    sold: 12,
-  },
-];
 
 function Manage() {
-  const location = useLocation();
-  const navigate = useNavigate();
   const user = useRecoilValue(userState);
-  const [productsLength, setProductsLength] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // if check kalo dia di path "/app" doang bukan di  "app/home"
@@ -86,7 +50,7 @@ function Manage() {
               <div>
                 <h5 className="font-semibold text-xl">
                   {/* {store.storeName} Store */}
-                  Admin Dashboard
+                  Operator Dashboard
                 </h5>
                 <CopyToClipboard
                   // text={`https://axions.vercel.app/${store.storeName}`}

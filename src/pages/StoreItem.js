@@ -98,7 +98,7 @@ function StoreItem() {
             onClick={() => navigate(`/${store.storeName}`)}
           >
             <Icon icon="charm:chevron-left" width={20} />
-            Kembali Ke Toko
+            Back Ke Toko
           </button>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 my-6 gap-2 md:gap-6">
             <div className={`col-span-1 ${store.colorTheme + "-pg"}`}>
@@ -116,7 +116,7 @@ function StoreItem() {
                 onClick={() => navigate(`/${store.storeName}`)}
               >
                 <Icon icon="charm:chevron-left" width={20} />
-                Kembali Ke Toko
+                Back Ke Toko
               </button>
               <h5 className="text-3xl font-semibold">{product.name}</h5>
               <p className="text-sm">Terjual {product.sold}</p>
@@ -162,7 +162,7 @@ function StoreItem() {
                   onClick={() => addToCartHandler()}
                   disabled={!product.active}
                 >
-                  {product.active ? "Tambah Ke Keranjang" : "Sold Out"}
+                  {product.active ? "Add Ke Keranjang" : "Sold Out"}
                 </button>
               </div>
             </div>

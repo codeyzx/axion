@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../atoms/userAtom";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/SidebarOperator";
 import lottieJson from "../../assets/97110-purple-spinner.json";
 import logo from "../../assets/axionIcon.svg";
 import MobileAdminModal from "../../components/MobileAdminModal";
 import { authToken } from "../../atoms/authToken";
 import { getRequest } from "../../configs/axios";
 
-function AdminLayout() {
+function OperatorLayout() {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
   const [token, setToken] = useRecoilState(authToken);
@@ -20,7 +20,7 @@ function AdminLayout() {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!token || user.role !== "Admin") {
+    if (!token || user.role !== "Operator") {
       console.log("no token");
       // localStorage.clear();
       navigate("/login");
@@ -85,4 +85,4 @@ function AdminLayout() {
   }
 }
 
-export default AdminLayout;
+export default OperatorLayout;

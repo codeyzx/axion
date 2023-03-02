@@ -9,42 +9,17 @@ import { navbarAdmin } from "../atoms/navbarAdmin";
 const sidebarItems = [
   {
     itemName: "Home",
-    itemPath: "/admin/home",
+    itemPath: "/operator/home",
     icon: "carbon:home",
   },
   {
     itemName: "Auctions",
-    itemPath: "/admin/auctions",
+    itemPath: "/operator/auctions",
     icon: "carbon:money",
   },
-  {
-    itemName: "Transactions",
-    itemPath: "/admin/transactions",
-    icon: "carbon:shopping-cart",
-  },
-  {
-    itemName: "Products",
-    itemPath: "/admin/products",
-    icon: "carbon:tag",
-  },
-  {
-    itemName: "History",
-    itemPath: "/admin/history",
-    icon: "carbon:watch",
-  },
-  {
-    itemName: "Users",
-    itemPath: "/admin/users",
-    icon: "bi:people",
-  },
-  // {
-  //   itemName: "Settings",
-  //   itemPath: "/admin/settings",
-  //   icon: "carbon:settings",
-  // },
 ];
 
-function Sidebar() {
+function SidebarOperator() {
   const locationNow = useLocation();
   const setIsOpen = useSetRecoilState(navbarAdmin);
 
@@ -58,15 +33,7 @@ function Sidebar() {
           {/* <SidebarProfile img={store.profileImg} name={store.storeName} /> */}
 
           <div className="flex items-center gap-2 w-full rounded">
-            {/* <img
-              src={store.profileImg}
-              className="w-12 h-12 rounded-full p-[2px] border-2 border-purple-600 object-cover"
-              alt=""
-            /> */}
-            <p className="font-medium text-left lg:text-[15px]">
-              {/* {store.storeName} */}
-              WellStore
-            </p>
+            <p className="font-medium text-left lg:text-[15px]">Operator</p>
           </div>
 
           {/* Sidebar Items Container */}
@@ -87,11 +54,10 @@ function Sidebar() {
 
       {/* Navbar For Mobile */}
       <nav className="flex md:hidden z-50 bg-white p-5 border-b-[1px] border-gray-300 items-center justify-between shadow fixed top-0 w-screen overflow-hidden">
-        <Link to="/admin/home">
+        <Link to="/operator/home">
           <img src={logo} alt="" />
         </Link>
         <div className="flex items-center gap-8">
-          {/* <Notification /> */}
           <Icon
             icon="charm:menu-hamburger"
             width="32"
@@ -104,4 +70,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarOperator;

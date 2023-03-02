@@ -130,7 +130,7 @@ function NewHistory() {
                     loading && "opacity-75 hover:bg-white"
                   } `}
                 >
-                  Batalkan
+                  Cancel
                 </button>
                 <button
                   type="submit"
@@ -139,7 +139,7 @@ function NewHistory() {
                     loading && "opacity-75 hover:bg-purple-600"
                   }`}
                 >
-                  Simpan History
+                  Save History
                 </button>
               </div>
             </div>

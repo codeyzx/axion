@@ -196,7 +196,7 @@ function NewUser() {
                     loading && "opacity-75 hover:bg-white"
                   } `}
                 >
-                  Batalkan
+                  Cancel
                 </button>
                 <button
                   type="submit"
@@ -205,7 +205,7 @@ function NewUser() {
                     loading && "opacity-75 hover:bg-purple-600"
                   }`}
                 >
-                  Simpan User
+                  Save User
                 </button>
               </div>
             </div>

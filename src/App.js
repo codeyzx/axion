@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import Manage from "./pages/app/Manage";
+import ManageOperator from "./pages/app/ManageOperator";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
 import Onboarding from "./pages/Onboarding";
@@ -33,6 +34,7 @@ import OrderStatusDetail from "./pages/OrderStatusDetail";
 import EditOrder from "./pages/app/orders/EditOrder";
 import MobileModal from "./components/MobileModal";
 import AdminLayout from "./pages/app/AdminLayout";
+import OperatorLayout from "./pages/app/OperatorLayout";
 import User from "./pages/app/user/User";
 import NewUser from "./pages/app/user/NewUser";
 import EditUser from "./pages/app/user/EditUser";
@@ -85,6 +87,13 @@ function App() {
               <Route path="customers/new" element={<NewCustomer />} />
               <Route path="customers/:id" element={<EditCustomer />} />
               <Route path="settings" element={<Setting />} />
+            </Route>
+            <Route path="operator" element={<OperatorLayout />}>
+              <Route index element={<ManageOperator />} />
+              <Route path="home" element={<ManageOperator />} />
+              <Route path="auctions" element={<Auctions />} />
+              <Route path="auctions/new" element={<NewAuction />} />
+              <Route path="auctions/:id" element={<EditAuction />} />
             </Route>
             <Route path="admin" element={<AdminLayout />}>
               <Route index element={<Manage />} />

@@ -94,7 +94,7 @@ function OrderStatusDetail() {
           onClick={() => navigate("/order-status")}
         >
           <Icon icon="ci:chevron-left" />
-          <p>Kembali</p>
+          <p>Back</p>
         </button>
         <h5 className="font-semibold text-xl">Detail Status Pesanan</h5>
         <div className="orderContainer">

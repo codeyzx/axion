@@ -36,7 +36,7 @@ function NewOrder() {
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </Link>
 
         <div className="contentContainer">
@@ -69,13 +69,13 @@ function NewOrder() {
             </div>
             <div>
               <label htmlFor="harga" className="font-medium">
-                Harga (Rupiah)<span className="text-red-600">*</span>
+                Price (Rupiah)<span className="text-red-600">*</span>
               </label>
               <input
                 type="number"
                 id="harga"
                 className="addInput"
-                placeholder="Harga"
+                placeholder="Price"
                 required
               />
               <p className="text-xs font-medium text-purple-500">
@@ -103,7 +103,7 @@ function NewOrder() {
                       alt="img placeholder"
                       className="w-32"
                     />
-                    <h5 className="text-sm font-medium">Tambah Gambar</h5>
+                    <h5 className="text-sm font-medium">Add Gambar</h5>
                   </>
                 )}
               </div>
@@ -121,13 +121,13 @@ function NewOrder() {
                   to="/app/orders"
                   className="rounded py-3 hover:bg-purple-100 font-semibold text-sm px-6 text-purple-600 border-2 border-purple-600"
                 >
-                  Batalkan
+                  Cancel
                 </Link>
                 <button
                   type="submit"
                   className="bg-purple-600 py-3 hover:bg-purple-700 px-6 font-semibold text-white rounded text-sm"
                 >
-                  Simpan Produk
+                  Save Produk
                 </button>
               </div>
             </div>

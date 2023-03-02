@@ -118,7 +118,7 @@ function NewAuction() {
         isLoading: false,
         autoClose: 2000,
       });
-      navigate("/admin/auctions");
+      navigate("/" + user.role.toLowerCase() + "/auctions");
     } catch (err) {
       toast.update(idToast, {
         render: "Terjadi Kesalahan",
@@ -141,11 +141,11 @@ function NewAuction() {
 
       <div className="layoutContainer min-h-screen">
         <Link
-          to="/admin/auctions"
+          to={"/" + user.role.toLowerCase() + "/auctions"}
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </Link>
 
         <div className="contentContainer">
@@ -172,7 +172,7 @@ function NewAuction() {
                 <label htmlFor="userId" className="font-medium">
                   Product
                 </label>
-                <div>
+                <div className="product-child">
                   <div>
                     <label htmlFor="name" className="font-medium">
                       Name<span className="text-red-600">*</span>
@@ -246,7 +246,7 @@ function NewAuction() {
                             alt="img placeholder"
                             className="w-32"
                           />
-                          <h5 className="text-sm font-medium">Tambah Image</h5>
+                          <h5 className="text-sm font-medium">Add Image</h5>
                         </>
                       )}
                     </div>
@@ -335,12 +335,14 @@ function NewAuction() {
                 <div className="my-1 justify-end flex gap-3 md:">
                   <button
                     disabled={loading}
-                    onClick={() => navigate("/admin/auctions")}
+                    onClick={() =>
+                      navigate("/" + user.role.toLowerCase() + "/auctions")
+                    }
                     className={`batalkanBtn ${
                       loading && "opacity-75 hover:bg-white"
                     } `}
                   >
-                    Batalkan
+                    Cancel
                   </button>
                   <button
                     type="submit"
@@ -349,7 +351,7 @@ function NewAuction() {
                       loading && "opacity-75 hover:bg-purple-600"
                     }`}
                   >
-                    Simpan Auctions
+                    Save Auctions
                   </button>
                 </div>
               </form>

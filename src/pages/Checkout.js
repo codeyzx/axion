@@ -213,7 +213,7 @@ function Checkout() {
           onClick={() => navigate(-1)}
         >
           <Icon icon="ci:chevron-left" width={20} />
-          <p>Kembali</p>
+          <p>Back</p>
         </div>
         <div className="md:grid flex flex-col-reverse md:grid-cols-11 gap-4">
           <div className="md:col-span-7  p-3 border-gray-300 border-[1px] rounded">

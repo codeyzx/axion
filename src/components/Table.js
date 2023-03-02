@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTable, useFilters, useSortBy, usePagination } from "react-table";
 
 export default function Table({ columns, data, filterInput, filterColumn }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Table component logic and UI come here
   const {
@@ -30,8 +30,8 @@ export default function Table({ columns, data, filterInput, filterColumn }) {
   }, [filterInput]);
 
   const rowClickHandler = (id) => {
-    navigate(id.toString())
-  }
+    navigate(id.toString());
+  };
 
   return (
     <>
@@ -94,22 +94,26 @@ export default function Table({ columns, data, filterInput, filterColumn }) {
           <Icon
             icon="cil:chevron-circle-left-alt"
             width="28"
-            className={`${!canPreviousPage
+            className={`${
+              !canPreviousPage
                 ? "opacity-40 cursor-auto"
                 : "hover:text-purple-600 text-gray-700"
-              } cursor-pointer`}
+            } cursor-pointer`}
           />
         </button>
         <p className="font-medium text-gray-600">
-          <span className="text-purple-700">{pageIndex + 1}</span> dari{" "}
+          <span className="text-purple-700">{pageIndex + 1}</span> of{" "}
           {pageOptions.length}
         </p>
         <button disabled={!canNextPage} onClick={() => nextPage()}>
           <Icon
             icon="cil:chevron-circle-right-alt"
             width="28"
-            className={`${!canNextPage ? "opacity-40 cursor-auto" : "hover:text-purple-600 text-gray-700"
-              } cursor-pointer`}
+            className={`${
+              !canNextPage
+                ? "opacity-40 cursor-auto"
+                : "hover:text-purple-600 text-gray-700"
+            } cursor-pointer`}
           />
         </button>
       </div>

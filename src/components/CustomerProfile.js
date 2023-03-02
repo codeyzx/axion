@@ -2,7 +2,7 @@ import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
 import { signOut } from "firebase/auth";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { checkoutModal } from "../atoms/checkoutModalAtom";
 import { auth } from "../firebase";
@@ -10,10 +10,14 @@ import {toast} from 'react-toastify'
 
 function CustomerProfile({ user, color }) {
   const setIsOpen = useSetRecoilState(checkoutModal);
+  const navigate = useNavigate();
 
   const logoutHandler = async () => {
     try {
-      signOut(auth);
+      // signOut(auth);
+
+      localStorage.clear();
+      navigate("/login");
       toast.info('Berhasil Logout')
     } catch (err) {
       console.error(err);

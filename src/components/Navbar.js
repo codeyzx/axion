@@ -16,7 +16,7 @@ function Navbar() {
 
     if (!token || user.role !== "Admin") {
       console.log("no token");
-      localStorage.clear();
+      // localStorage.clear();
       return;
     } else {
       await getRequest("check-jwt", token)

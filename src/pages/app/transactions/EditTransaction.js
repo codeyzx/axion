@@ -139,7 +139,7 @@ function EditTransaction() {
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
-          Kembali
+          Back
         </button>
 
         <div className="contentContainer">
@@ -231,7 +231,7 @@ function EditTransaction() {
                       (loading || !isChange) && "opacity-75 hover:bg-white"
                     } `}
                   >
-                    Batalkan
+                    Cancel
                   </button>
                   <button
                     type="submit"
@@ -240,7 +240,7 @@ function EditTransaction() {
                       (loading || !isChange) && "opacity-75 hover:bg-purple-600"
                     }`}
                   >
-                    Simpan Product
+                    Save Product
                   </button>
                 </div>
               </form>
