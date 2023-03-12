@@ -56,7 +56,10 @@ function Auctions() {
   const getAuctions = async () => {
     await getRequest("auctions", token)
       .then((res) => {
-        if (user.role.toLowerCase() === "admin" || "operator") {
+        if (
+          user.role.toLowerCase() === "admin" ||
+          user.role.toLowerCase() === "operator"
+        ) {
           setAuctions(res.data);
         } else {
           const filteredData = res.data.filter(
