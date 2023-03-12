@@ -145,7 +145,7 @@ function FeedItem() {
                 Back Ke Toko
               </button>
               <h5 className="text-3xl font-semibold">{auction.name}</h5>
-              <p className="text-sm">Terjual {auction.bidders_count}</p>
+              <p className="text-sm">Bidders {auction.bidders_count}</p>
               <h6 className="text-xl font-semibold">
                 {rupiahConverter(auction.last_price)}
               </h6>

@@ -9,7 +9,7 @@ function TopProduct({name, sold, index}) {
           {name}
         </span>
       </p>
-      <p className="text-[13px] text-gray-700 col-span-1 ml-6 md:ml-0">{sold} Terjual</p>
+      <p className="text-[13px] text-gray-700 col-span-1 ml-6 md:ml-0">{sold} Bidders</p>
     </div>
   );
 }

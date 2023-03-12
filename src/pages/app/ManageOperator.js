@@ -271,10 +271,11 @@ function ManageOperator() {
           <div className="grid grid-cols-1 my-4 gap-5">
             <StatistikAngka
               title="Total Auction"
-              value={auctions.length + " Auction"}
-              // value={`${
-              //   productsLength ? productsLength + " Produk" : "Mengambil data..."
-              // }`}
+              value={
+                auctions.length === 0
+                  ? "No Auction"
+                  : auctions.length + " Auction"
+              }
               emoji={"emojiProduk"}
             />
           </div>
@@ -289,6 +290,10 @@ function ManageOperator() {
                 <div className="w-full h-full">
                   {statusLabels === false ? (
                     <div>Loading...</div>
+                  ) : statusLabels[0] === 0 && statusLabels[1] === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <p className="text-xl font-semibold">No Auction</p>
+                    </div>
                   ) : (
                     <Pie
                       data={pieChart}

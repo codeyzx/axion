@@ -6,7 +6,6 @@ import Layout from "./pages/app/Layout";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
-import Manage from "./pages/app/Manage";
 import ManageOperator from "./pages/app/ManageOperator";
 import ManageUser from "./pages/app/ManageUser";
 import { ToastContainer } from "react-toastify";

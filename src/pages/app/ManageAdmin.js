@@ -127,7 +127,6 @@ function ManageAdmin() {
 
         const counts = result.map((obj) => obj.count);
 
-        console.log(counts);
         setBidders(counts);
 
         const labels = result.map((item) => {
@@ -281,22 +280,22 @@ function ManageAdmin() {
 
           {/* Statistik Angka */}
           <div className="grid grid-cols-2 my-4 gap-5">
-            {/* <StatistikAngka
-            title="Pengunjung Minggu Ini"
-            value="120 Pengunjung"
-            emoji={"emojiMata"}
-          /> */}
             <StatistikAngka
               title="Total Transaction"
-              value={transactions.length + " Transaction"}
+              value={
+                transactions.length === 0
+                  ? "No Transaction"
+                  : transactions.length + " Transaction"
+              }
               emoji={"emojiCart"}
             />
             <StatistikAngka
               title="Total Auction"
-              value={auctions.length + " Auction"}
-              // value={`${
-              //   productsLength ? productsLength + " Produk" : "Mengambil data..."
-              // }`}
+              value={
+                auctions.length === 0
+                  ? "No Auction"
+                  : auctions.length + " Auction"
+              }
               emoji={"emojiProduk"}
             />
           </div>
@@ -311,6 +310,10 @@ function ManageAdmin() {
                 <div className="w-full h-full">
                   {statusLabels === false ? (
                     <div>Loading...</div>
+                  ) : statusLabels[0] === 0 && statusLabels[1] === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full">
+                      <p className="text-xl font-semibold">No Auction</p>
+                    </div>
                   ) : (
                     <Pie
                       data={pieChart}
