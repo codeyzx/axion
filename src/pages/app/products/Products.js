@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import EmptyTable from "../../../components/EmptyTable";
 import NavbarAdmin from "../../../components/NavbarAdmin";
@@ -13,11 +14,22 @@ import rupiahConverter from "../../../helpers/rupiahConverter";
 
 function Products() {
   const user = useRecoilValue(userState);
+  const token = useRecoilValue(authToken);
   const [filterInput, setFilterInput] = useState("");
   const [products, setProducts] = useState(false);
 
+  const path = () => {
+    var entity = "";
+    if (user.role.toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user.role.toLowerCase();
+    }
+    return "/" + entity + "/products/new";
+  };
+
   const downloadPDF = async () => {
-    const response = await downloadRequest("products-export-pdf");
+    const response = await downloadRequest("products-export-pdf", token);
     const blob = new Blob([response.data]);
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -29,7 +41,7 @@ function Products() {
   };
 
   const downloadExcel = async () => {
-    const response = await downloadRequest("products-export-excel");
+    const response = await downloadRequest("products-export-excel", token);
     const blob = new Blob([response.data]);
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -41,13 +53,27 @@ function Products() {
   };
 
   const getProducts = async () => {
-    await getRequest("products")
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.log("err::::: ", err);
-      });
+    if (user.role.toLowerCase() === "admin") {
+      await getRequest("products")
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .catch((err) => {
+          console.log("err::::: ", err);
+        });
+    } else {
+      await getRequest("products-by-users/" + user.id)
+        .then((res) => {
+          if (res.data === null) {
+            setProducts([]);
+          } else {
+            setProducts(res.data);
+          }
+        })
+        .catch((err) => {
+          console.log("err::::: ", err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -116,10 +142,13 @@ function Products() {
       <div className="layoutContainer min-h-screen">
         <div className="flex justify-between items-center">
           <h1 className="pageName">Products</h1>
-          <Link to="/admin/products/new" className="addButton">
-            <Icon icon="akar-icons:plus" width="18" />
-            New Product
-          </Link>
+          {/* <Link to="/admin/products/new" className="addButton"> */}
+          {user.role.toLowerCase() !== "users" && (
+            <Link to={path()} className="addButton">
+              <Icon icon="akar-icons:plus" width="18" />
+              New Product
+            </Link>
+          )}
         </div>
         <div className="contentContainer">
           <div className="flex flex-row justify-between">

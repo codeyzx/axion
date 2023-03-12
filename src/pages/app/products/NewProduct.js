@@ -24,6 +24,16 @@ function NewProduct() {
   const [loading, setLoading] = useState(false);
   const token = useRecoilValue(authToken);
 
+  const path = () => {
+    var entity = "";
+    if (user.role.toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user.role.toLowerCase();
+    }
+    return "/" + entity + "/products";
+  };
+
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
@@ -38,12 +48,6 @@ function NewProduct() {
       if (selectedImage) {
         image = selectedImage;
       }
-
-      // const formData = new FormData();
-      // formData.append("name", data.name);
-      // formData.append("description", data.description);
-      // formData.append("price", data.price);
-      // formData.append("image", image);
 
       const json = {
         name: data.name,
@@ -60,7 +64,7 @@ function NewProduct() {
         isLoading: false,
         autoClose: 2000,
       });
-      navigate("/admin/products");
+      navigate(path());
     } catch (err) {
       toast.update(idToast, {
         render: "Terjadi Kesalahan",
@@ -83,7 +87,7 @@ function NewProduct() {
 
       <div className="layoutContainer min-h-screen">
         <Link
-          to="/admin/products"
+          to={path()}
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
@@ -185,7 +189,7 @@ function NewProduct() {
             <div className="my-1 justify-end flex gap-3 md:">
               <button
                 disabled={loading}
-                onClick={() => navigate("/admin/products")}
+                onClick={() => navigate(path())}
                 className={`batalkanBtn ${
                   loading && "opacity-75 hover:bg-white"
                 } `}

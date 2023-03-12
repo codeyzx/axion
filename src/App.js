@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import Manage from "./pages/app/Manage";
 import ManageOperator from "./pages/app/ManageOperator";
+import ManageUser from "./pages/app/ManageUser";
 import { ToastContainer } from "react-toastify";
 import { RecoilRoot } from "recoil";
 import Onboarding from "./pages/Onboarding";
@@ -16,7 +17,6 @@ import Orders from "./pages/app/orders/Orders";
 import History from "./pages/app/history/History";
 import Products from "./pages/app/products/Products";
 import Customers from "./pages/app/customers/Customers";
-import Setting from "./pages/app/Setting";
 import NewProduct from "./pages/app/products/NewProduct";
 import NewHistory from "./pages/app/history/NewHistory";
 import NewCustomer from "./pages/app/customers/NewCustomer";
@@ -36,6 +36,7 @@ import MobileModal from "./components/MobileModal";
 import AdminLayout from "./pages/app/AdminLayout";
 import OperatorLayout from "./pages/app/OperatorLayout";
 import User from "./pages/app/user/User";
+import Account from "./pages/app/user/Account";
 import NewUser from "./pages/app/user/NewUser";
 import EditUser from "./pages/app/user/EditUser";
 import EditRole from "./pages/app/user/EditRole";
@@ -46,6 +47,11 @@ import Transactions from "./pages/app/transactions/Transactions";
 import Auctions from "./pages/app/auctions/Auctions";
 import EditAuction from "./pages/app/auctions/EditAuction";
 import NewAuction from "./pages/app/auctions/NewAuction";
+import ViewTransaction from "./pages/app/transactions/ViewTransaction";
+import ManageAdmin from "./pages/app/ManageAdmin";
+import FeedFront from "./pages/FeedFront";
+import FeedLayout from "./pages/FeedLayout";
+import FeedItem from "./pages/FeedItem";
 
 function App() {
   return (
@@ -57,6 +63,11 @@ function App() {
           <MobileModal />
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* <Route path="feed"> */}
+            <Route path="feed" element={<FeedLayout />}>
+              <Route index element={<FeedFront />} />
+              <Route path=":productId" element={<FeedItem />} />
+            </Route>
             <Route path="faq" element={<Faq />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
@@ -73,20 +84,25 @@ function App() {
               <Route path=":productId" element={<StoreItem />} />
             </Route>
             <Route path="app" element={<Layout />}>
-              <Route index element={<Manage />} />
-              <Route path="home" element={<Manage />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="orders/:id" element={<EditOrder />} />
+              <Route index element={<ManageUser />} />
+              <Route path="home" element={<ManageUser />} />
+              <Route path="auctions" element={<Auctions />} />
+              <Route path="auctions/new" element={<NewAuction />} />
+              <Route path="auctions/:id" element={<EditAuction />} />
               <Route path="products" element={<Products />} />
               <Route path="products/new" element={<NewProduct />} />
               <Route path="products/:id" element={<EditProduct />} />
+              <Route path="transactions" element={<Transactions />} />
+              <Route path="transactions/:id" element={<ViewTransaction />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="orders/:id" element={<EditOrder />} />
               <Route path="history" element={<History />} />
               <Route path="history/new" element={<NewHistory />} />
               <Route path="history/:id" element={<EditHistory />} />
               <Route path="customers" element={<Customers />} />
               <Route path="customers/new" element={<NewCustomer />} />
               <Route path="customers/:id" element={<EditCustomer />} />
-              <Route path="settings" element={<Setting />} />
+              <Route path="settings" element={<Account />} />
             </Route>
             <Route path="operator" element={<OperatorLayout />}>
               <Route index element={<ManageOperator />} />
@@ -96,8 +112,8 @@ function App() {
               <Route path="auctions/:id" element={<EditAuction />} />
             </Route>
             <Route path="admin" element={<AdminLayout />}>
-              <Route index element={<Manage />} />
-              <Route path="home" element={<Manage />} />
+              <Route index element={<ManageAdmin />} />
+              <Route path="home" element={<ManageAdmin />} />
               <Route path="auctions" element={<Auctions />} />
               <Route path="auctions/new" element={<NewAuction />} />
               <Route path="auctions/:id" element={<EditAuction />} />

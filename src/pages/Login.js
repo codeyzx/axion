@@ -1,4 +1,3 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ import { authToken } from "../atoms/authToken";
 import { userState } from "../atoms/userAtom";
 import GoogleLogin from "../components/GoogleLogin";
 import { postRequest } from "../configs/axios";
-import { auth } from "../firebase";
 
 function Login() {
   const navigate = useNavigate();

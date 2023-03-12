@@ -17,8 +17,17 @@ function Auctions() {
   const user = useRecoilValue(userState);
   const [filterInput, setFilterInput] = useState("");
   const [auctions, setAuctions] = useState(false);
-  // const [users , setUsers] = useState(false);
   const token = useRecoilValue(authToken);
+
+  const path = () => {
+    var entity = "";
+    if (user.role.toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user.role.toLowerCase();
+    }
+    return "/" + entity + "/auctions/new";
+  };
 
   const downloadPDF = async () => {
     const response = await downloadRequest("auctions-export-pdf", token);
@@ -47,10 +56,17 @@ function Auctions() {
   const getAuctions = async () => {
     await getRequest("auctions", token)
       .then((res) => {
-        setAuctions(res.data);
+        if (user.role.toLowerCase() === "admin" || "operator") {
+          setAuctions(res.data);
+        } else {
+          const filteredData = res.data.filter(
+            (auction) => auction.user.id === user.id
+          );
+          setAuctions(filteredData);
+        }
       })
       .catch((err) => {
-        console.log("err::::: ", err);
+        console.log(err);
       });
   };
 
@@ -65,86 +81,155 @@ function Auctions() {
   const dataMemo = useMemo(() => auctions, [auctions]);
 
   const columns = useMemo(
-    () => [
-      // {
-      //   Header: "Gambar",
-      //   accessor: "image",
-      //   Cell: ({ cell: { value } }) => (
-      //     <img
-      //       src={"http://127.0.0.1:8080/" + value}
-      //       alt="productImg"
-      //       className="h-16 w-16 object-cover"
-      //     />
-      //   ),
-      // },
-      {
-        Header: "Nama",
-        accessor: "name",
-        Cell: ({ cell: { value } }) => (
-          <p className={`max-w-[100px]`}>{value}</p>
-        ),
-      },
-      {
-        Header: "Last Price",
-        accessor: "last_price",
-        Cell: ({ cell: { value } }) => (
-          <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
-        ),
-      },
-      {
-        Header: "Status",
-        accessor: "status",
-        Cell: ({ cell: { value } }) => (
-          <p className={`${value} rounded text-[13px] p-1 w-fit font-semibold`}>
-            {value}
-          </p>
-        ),
-      },
-      {
-        Header: "Bidders",
-        accessor: "bidders_count",
-        Cell: ({ cell: { value } }) => (
-          <p
-            className={`lg:max-w-[300px] truncate md:max-w-[160px] max-w-[90px]`}
-          >
-            {value}
-          </p>
-        ),
-      },
-      {
-        Header: "User",
-        accessor: "user.name",
-      },
-      {
-        Header: "Product",
-        accessor: "product.name",
-      },
-      {
-        Header: "Image",
-        accessor: "product.image",
-        Cell: ({ cell: { value } }) =>
-          value !== "" ? (
-            <img
-              src={"http://127.0.0.1:8080/" + value}
-              alt="productImg"
-              className="h-16 w-16 object-cover"
-            />
-          ) : (
-            <img
-              src={"https://picsum.photos/200/300.jpg"}
-              alt="productImg"
-              className="h-16 w-16 object-cover"
-            />
-          ),
-      },
-      {
-        Header: "End At",
-        accessor: "end_at",
-        Cell: ({ cell: { value } }) => (
-          <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
-        ),
-      },
-    ],
+    () =>
+      user.role.toLowerCase() === "users"
+        ? [
+            {
+              Header: "Nama",
+              accessor: "name",
+              Cell: ({ cell: { value } }) => (
+                <p className={`max-w-[100px]`}>{value}</p>
+              ),
+            },
+            {
+              Header: "Last Price",
+              accessor: "last_price",
+              Cell: ({ cell: { value } }) => (
+                <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
+              ),
+            },
+            {
+              Header: "Status",
+              accessor: "status",
+              Cell: ({ cell: { value } }) => (
+                <p
+                  className={`${value} rounded text-[13px] p-1 w-fit font-semibold`}
+                >
+                  {value}
+                </p>
+              ),
+            },
+            {
+              Header: "BidCount",
+              accessor: "bidders_count",
+              Cell: ({ cell: { value } }) => (
+                <p
+                  className={`lg:max-w-[300px] truncate md:max-w-[160px] max-w-[90px]`}
+                >
+                  {value}
+                </p>
+              ),
+            },
+            {
+              Header: "Bidder",
+              accessor: "bidder.name",
+            },
+            {
+              Header: "Product",
+              accessor: "product.name",
+            },
+            {
+              Header: "Image",
+              accessor: "product.image",
+              Cell: ({ cell: { value } }) =>
+                value !== "" ? (
+                  <img
+                    src={"http://127.0.0.1:8080/" + value}
+                    alt="productImg"
+                    className="h-16 w-16 object-cover"
+                  />
+                ) : (
+                  <img
+                    src={"https://picsum.photos/200/300.jpg"}
+                    alt="productImg"
+                    className="h-16 w-16 object-cover"
+                  />
+                ),
+            },
+            {
+              Header: "End At",
+              accessor: "end_at",
+              Cell: ({ cell: { value } }) => (
+                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+              ),
+            },
+          ]
+        : [
+            {
+              Header: "Nama",
+              accessor: "name",
+              Cell: ({ cell: { value } }) => (
+                <p className={`max-w-[100px]`}>{value}</p>
+              ),
+            },
+            {
+              Header: "Last Price",
+              accessor: "last_price",
+              Cell: ({ cell: { value } }) => (
+                <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
+              ),
+            },
+            {
+              Header: "Status",
+              accessor: "status",
+              Cell: ({ cell: { value } }) => (
+                <p
+                  className={`${value} rounded text-[13px] p-1 w-fit font-semibold`}
+                >
+                  {value}
+                </p>
+              ),
+            },
+            {
+              Header: "BidCount",
+              accessor: "bidders_count",
+              Cell: ({ cell: { value } }) => (
+                <p
+                  className={`lg:max-w-[300px] truncate md:max-w-[160px] max-w-[90px]`}
+                >
+                  {value}
+                </p>
+              ),
+            },
+            {
+              Header: "Bidder",
+              accessor: "bidder.name",
+            },
+            {
+              Header: "User",
+              accessor: "user.name",
+            },
+            {
+              Header: "Product",
+              accessor: "product.name",
+            },
+            {
+              Header: "Image",
+              accessor: "product.image",
+              Cell: ({ cell: { value } }) =>
+                value !== "" ? (
+                  <img
+                    src={"http://127.0.0.1:8080/" + value}
+                    alt="productImg"
+                    className="h-16 w-16 object-cover"
+                  />
+                ) : (
+                  <img
+                    src={"https://picsum.photos/200/300.jpg"}
+                    alt="productImg"
+                    className="h-16 w-16 object-cover"
+                  />
+                ),
+            },
+            {
+              Header: "End At",
+              accessor: "end_at",
+              Cell: ({ cell: { value } }) => (
+                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+              ),
+            },
+          ],
+
     []
   );
 
@@ -162,11 +247,7 @@ function Auctions() {
       <div className="layoutContainer min-h-screen">
         <div className="flex justify-between items-center">
           <h1 className="pageName">Auctions</h1>
-          {/* <Link to={path} className="addButton"> */}
-          <Link
-            to={"/" + user.role.toLowerCase() + "/auctions/new"}
-            className="addButton"
-          >
+          <Link to={path()} className="addButton">
             <Icon icon="akar-icons:plus" width="18" />
             New Auction
           </Link>

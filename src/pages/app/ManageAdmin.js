@@ -36,7 +36,7 @@ import { Line, Pie } from "react-chartjs-2";
 //   },
 // ];
 
-function ManageOperator() {
+function ManageAdmin() {
   const location = useLocation();
   const navigate = useNavigate();
   const user = useRecoilValue(userState);
@@ -47,6 +47,7 @@ function ManageOperator() {
   const [labels, setLabels] = useState(false);
   const [statusLabels, setStatusLabels] = useState(false);
   const [bidders, setBidders] = useState(false);
+  const [transactions, setTransactions] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const pieChart = {
@@ -170,12 +171,23 @@ function ManageOperator() {
       });
   };
 
+  const getTransactions = async () => {
+    await getRequest(`auction-histories/`, token)
+      .then((res) => {
+        setTransactions(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     // if check kalo dia di path "/app" doang bukan di  "app/home"
     if (!location.pathname.includes("/home")) navigate("/app/home");
     setLoading(true);
     try {
       getAuction();
+      getTransactions();
     } catch (err) {
       console.error(err);
     } finally {
@@ -268,7 +280,17 @@ function ManageOperator() {
           </div>
 
           {/* Statistik Angka */}
-          <div className="grid grid-cols-1 my-4 gap-5">
+          <div className="grid grid-cols-2 my-4 gap-5">
+            {/* <StatistikAngka
+            title="Pengunjung Minggu Ini"
+            value="120 Pengunjung"
+            emoji={"emojiMata"}
+          /> */}
+            <StatistikAngka
+              title="Total Transaction"
+              value={transactions.length + " Transaction"}
+              emoji={"emojiCart"}
+            />
             <StatistikAngka
               title="Total Auction"
               value={auctions.length + " Auction"}
@@ -355,4 +377,4 @@ function ManageOperator() {
   );
 }
 
-export default ManageOperator;
+export default ManageAdmin;

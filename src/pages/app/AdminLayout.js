@@ -22,7 +22,6 @@ function AdminLayout() {
 
     if (!token || user.role !== "Admin") {
       console.log("no token");
-      // localStorage.clear();
       navigate("/login");
       return;
     } else {
@@ -59,13 +58,11 @@ function AdminLayout() {
     return () => instance.destroy();
   }, []);
 
-  if (loading || user === "") {
+  if (loading || user === "" || token === "") {
     return (
       <div className="flex justify-center items-center h-[100vh] flex-col">
-        {/* <img src={loading} alt="" /> */}
         <img src={logo} alt="" className="h-14" />
         <div id="lottie-container" className="w-28" />
-        {/* <div>loading</div> */}
       </div>
     );
   } else {

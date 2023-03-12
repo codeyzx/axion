@@ -1,5 +1,6 @@
 import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
+import dayjs from "dayjs";
 import React, { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -49,13 +50,23 @@ function Transactions() {
   };
 
   const getTransactions = async () => {
-    await getRequest("auction-histories", token)
-      .then((res) => {
-        setTransactions(res.data);
-      })
-      .catch((err) => {
-        console.log("err::::: ", err);
-      });
+    if (user.role.toLowerCase() === "admin") {
+      await getRequest("auction-histories", token)
+        .then((res) => {
+          setTransactions(res.data);
+        })
+        .catch((err) => {
+          console.log("err::::: ", err);
+        });
+    } else {
+      await getRequest(`auction-histories/user/${user.id}`, token)
+        .then((res) => {
+          setTransactions(res.data["data"]);
+        })
+        .catch((err) => {
+          console.log("err::::: ", err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -69,33 +80,69 @@ function Transactions() {
   const dataMemo = useMemo(() => transactions, [transactions]);
 
   const columns = useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "id",
-      },
-      {
-        Header: "Auction",
-        accessor: "auction_name",
-        Cell: ({ cell: { value } }) => (
-          <p className={`max-w-[160px]`}>{value}</p>
-        ),
-      },
-      {
-        Header: "User",
-        accessor: "user_name",
-        Cell: ({ cell: { value } }) => (
-          <p className={`max-w-[160px]`}>{value}</p>
-        ),
-      },
-      {
-        Header: "Price",
-        accessor: "price",
-        Cell: ({ cell: { value } }) => (
-          <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
-        ),
-      },
-    ],
+    () =>
+      user.role.toLowerCase() === "users"
+        ? [
+            {
+              Header: "ID",
+              accessor: "id",
+            },
+            {
+              Header: "Auction",
+              accessor: "auction.name",
+              Cell: ({ cell: { value } }) => (
+                <p className={`max-w-[160px]`}>{value}</p>
+              ),
+            },
+            {
+              Header: "Price",
+              accessor: "price",
+              Cell: ({ cell: { value } }) => (
+                <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
+              ),
+            },
+            {
+              Header: "Time",
+              accessor: "created_at",
+              Cell: ({ cell: { value } }) => (
+                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+              ),
+            },
+          ]
+        : [
+            {
+              Header: "ID",
+              accessor: "id",
+            },
+            {
+              Header: "Auction",
+              accessor: "auction_name",
+              Cell: ({ cell: { value } }) => (
+                <p className={`max-w-[160px]`}>{value}</p>
+              ),
+            },
+            {
+              Header: "User",
+              accessor: "user_name",
+              Cell: ({ cell: { value } }) => (
+                <p className={`max-w-[160px]`}>{value}</p>
+              ),
+            },
+            {
+              Header: "Price",
+              accessor: "price",
+              Cell: ({ cell: { value } }) => (
+                <p className={`text-[13px]`}>{rupiahConverter(value)}</p>
+              ),
+            },
+            {
+              Header: "Time",
+              accessor: "created_at",
+              Cell: ({ cell: { value } }) => (
+                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+              ),
+            },
+          ],
     []
   );
 
@@ -113,10 +160,12 @@ function Transactions() {
       <div className="layoutContainer min-h-screen">
         <div className="flex justify-between items-center">
           <h1 className="pageName">Transactions</h1>
-          <Link to="/admin/transactions/new" className="addButton">
-            <Icon icon="akar-icons:plus" width="18" />
-            New Transaction
-          </Link>
+          {user.role.toLowerCase() !== "users" && (
+            <Link to="/admin/transactions/new" className="addButton">
+              <Icon icon="akar-icons:plus" width="18" />
+              New Transaction
+            </Link>
+          )}
         </div>
         <div className="contentContainer">
           <div className="flex flex-row justify-between">
@@ -178,12 +227,23 @@ function Transactions() {
           {!transactions === false && (
             <>
               {dataMemo?.length > 0 ? (
-                <Table
-                  columns={columns}
-                  data={dataMemo}
-                  filterInput={filterInput}
-                  filterColumn="auction_name"
-                />
+                <>
+                  {user.role.toLowerCase() === "users" ? (
+                    <Table
+                      columns={columns}
+                      data={dataMemo}
+                      filterInput={filterInput}
+                      filterColumn="auction.name"
+                    />
+                  ) : (
+                    <Table
+                      columns={columns}
+                      data={dataMemo}
+                      filterInput={filterInput}
+                      filterColumn="auction_name"
+                    />
+                  )}
+                </>
               ) : (
                 <EmptyTable columns={columns} />
               )}

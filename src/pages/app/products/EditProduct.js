@@ -25,6 +25,16 @@ function EditProduct() {
   const [isChange, setIsChange] = useState(false);
   const token = useRecoilValue(authToken);
 
+  const path = () => {
+    var entity = "";
+    if (user.role.toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user.role.toLowerCase();
+    }
+    return "/" + entity + "/products";
+  };
+
   const getProduct = async () => {
     await getRequest("products/" + id, token)
       .then((res) => {
@@ -35,7 +45,7 @@ function EditProduct() {
         console.log(err);
         if (err.response.status === 404) {
           console.error("Product doesnt exist");
-          navigate("/admin/products");
+          navigate(path());
           return;
         }
       });
@@ -112,7 +122,7 @@ function EditProduct() {
     try {
       await deleteRequest("products/" + id, token);
       toast.success("Data Berhasil Dihapus");
-      navigate("/admin/products");
+      navigate(path());
     } catch (err) {
       console.error(err);
       toast.error("Terjadi Kesalahan");
@@ -130,7 +140,7 @@ function EditProduct() {
 
       <div className="layoutContainer min-h-screen">
         <button
-          onClick={() => navigate("/admin/products")}
+          onClick={() => navigate(path())}
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
@@ -251,7 +261,7 @@ function EditProduct() {
                     <button
                       type="button"
                       disabled={loading || !isChange}
-                      onClick={() => navigate("/admin/products")}
+                      onClick={() => navigate(path())}
                       className={`batalkanBtn ${
                         (loading || !isChange) && "opacity-75 hover:bg-white"
                       } `}

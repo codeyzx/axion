@@ -19,48 +19,34 @@ function EditAuction() {
   const user = useRecoilValue(userState);
   const [loading, setLoading] = useState(false);
   const [auction, setAuction] = useState(null);
-  // const [userName, setUserName] = useState("");
   const [firstLoading, setFirstLoading] = useState(true);
   const [isChange, setIsChange] = useState(false);
   const token = useRecoilValue(authToken);
 
-  // const [productName, setProductName] = useState("");
+  const path = () => {
+    var entity = "";
+    if (user.role.toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user.role.toLowerCase();
+    }
+    return "/" + entity + "/auctions";
+  };
 
   const getAuction = async () => {
     await getRequest("auctions/" + id, token)
       .then((res) => {
-        console.log(res);
         setAuction(res.data["data"]);
-        // setUserName(res.data["data"]["user"]["name"]);
-        // setProductName(res.data["data"]["product"]["name"]);
-        // return res.data["data"]["auction"]["product_id"];
-        // getProduct(res.data["data"]["auction"]["product_id"]);
       })
       .catch((err) => {
         console.log(err);
         if (err.response.status === 404) {
           console.error("Auction doesnt exist");
-          navigate("/" + user.role.toLowerCase() + "/auctions");
+          navigate(path());
           return;
         }
       });
   };
-
-  // const getProduct = async (id) => {
-  //   await getRequest("products/" + id, token)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setProductName(res.data["data"]["name"]);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       if (err.response.status === 404) {
-  //         console.error("Product doesnt exist");
-  //         navigate("/"+user.role.toLowerCase()+"/auctions");
-  //         return;
-  //       }
-  //     });
-  // };
 
   const changeHandler = () => {
     if (isChange === true) return;
@@ -89,6 +75,7 @@ function EditAuction() {
         name: data.name,
         status: data.status,
         userId: data.userId,
+        biddersCount: data.biddersCount,
       };
 
       await putRequest("auctions/" + id, json, token);
@@ -118,7 +105,7 @@ function EditAuction() {
     try {
       await deleteRequest("auctions/" + id, token);
       toast.success("Data Berhasil Dihapus");
-      navigate("/" + user.role.toLowerCase() + "/auctions");
+      navigate(path());
     } catch (err) {
       console.error(err);
       toast.error("Terjadi Kesalahan");
@@ -136,7 +123,7 @@ function EditAuction() {
 
       <div className="layoutContainer min-h-screen">
         <button
-          onClick={() => navigate("/" + user.role.toLowerCase() + "/auctions")}
+          onClick={() => navigate(path())}
           className="py-1 px-3 text-sm my-3 bg-white border-[1px] border-gray-300 hover:bg-gray-50 rounded font-medium flex items-center w-fit gap-1"
         >
           <Icon icon="akar-icons:chevron-left" className="inline" />
@@ -223,21 +210,22 @@ function EditAuction() {
                     perhatian jangan menggunakan titik (.)
                   </p>
                 </div>
-                <div>
-                  <label htmlFor="bidders_count" className="font-medium">
-                    Bidders
-                  </label>
-                  <input
-                    type="number"
-                    id="bidders_count"
-                    className="addInput"
-                    placeholder="Price"
-                    min={0}
-                    {...register("bidders_count")}
-                    defaultValue={auction?.bidders_count}
-                  />
-                </div>
-
+                {user.role.toLowerCase() !== "users" && (
+                  <div>
+                    <label htmlFor="biddersCount" className="font-medium">
+                      Bidders
+                    </label>
+                    <input
+                      type="number"
+                      id="biddersCount"
+                      className="addInput"
+                      placeholder="Price"
+                      min={0}
+                      {...register("biddersCount")}
+                      defaultValue={auction?.bidders_count}
+                    />
+                  </div>
+                )}
                 <div>
                   <label htmlFor="endAt" className="font-medium">
                     End At
@@ -256,9 +244,7 @@ function EditAuction() {
                   <button
                     type="button"
                     disabled={loading || !isChange}
-                    onClick={() =>
-                      navigate("/" + user.role.toLowerCase() + "/auctions")
-                    }
+                    onClick={() => navigate(path())}
                     className={`batalkanBtn ${
                       (loading || !isChange) && "opacity-75 hover:bg-white"
                     } `}

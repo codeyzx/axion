@@ -6,10 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { checkoutModal } from "../atoms/checkoutModalAtom";
 import { auth } from "../firebase";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 function CustomerProfile({ user, color }) {
-  const setIsOpen = useSetRecoilState(checkoutModal);
+  // const setIsOpen = useSetRecoilState(checkoutModal);
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
@@ -18,22 +18,28 @@ function CustomerProfile({ user, color }) {
 
       localStorage.clear();
       navigate("/login");
-      toast.info('Berhasil Logout')
+      toast.info("Berhasil Logout");
     } catch (err) {
       console.error(err);
     }
   };
 
   const loginHandler = () => {
-    setIsOpen(true);
+    // setIsOpen(true);
+    navigate("/login");
   };
 
   return (
     <Menu className="relative" as="div">
-      <Menu.Button className={`flex rounded-full hover:scale-105 transition-all ease-out duration-100 p-[2px] border-2 !text-black ${color + "Nav"} items-center gap-2 cursor-pointer w-full`}>
+      <Menu.Button
+        className={`flex rounded-full hover:scale-105 transition-all ease-out duration-100 p-[2px] border-2 !text-black ${
+          color + "Nav"
+        } items-center gap-2 cursor-pointer w-full`}
+      >
         {user ? (
           <img
-            src={user.image}
+            // src={user.image}
+            src="https://picsum.photos/200/300.jpg"
             className="w-8 h-8 rounded-full"
             alt="profile img"
           />
