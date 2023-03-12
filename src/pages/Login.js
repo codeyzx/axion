@@ -6,14 +6,13 @@ import { useRecoilState } from "recoil";
 import logo from "../assets/axionLogo.svg";
 import { authToken } from "../atoms/authToken";
 import { userState } from "../atoms/userAtom";
-import GoogleLogin from "../components/GoogleLogin";
 import { postRequest } from "../configs/axios";
 
 function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useRecoilState(userState);
-  const [token, setToken] = useRecoilState(authToken);
+  const [, setUser] = useRecoilState(userState);
+  const [, setToken] = useRecoilState(authToken);
 
   const emailRef = useRef();
   const passRef = useRef();
@@ -27,11 +26,10 @@ function Login() {
         email: emailRef.current.value,
         password: passRef.current.value,
       });
-      console.log(tokenReq);
       if (tokenReq.status === 200) {
         setToken(tokenReq.data["token"]);
         setUser(tokenReq.data["user"]);
-        // set token into local storage
+
         localStorage.setItem("token", tokenReq.data["token"]);
         localStorage.setItem("user", JSON.stringify(tokenReq.data["user"]));
 
@@ -56,14 +54,6 @@ function Login() {
           autoClose: 3000,
         });
       }
-
-      // await signInWithEmailAndPassword(
-      //   auth,
-      //   emailRef.current.value,
-      //   passRef.current.value
-      // );
-      // toast.update(id, { render: "Sukses, Selamat Datang!", type: "success", isLoading: false, autoClose: 2000 });
-      // navigate("/app/home");
     } catch (error) {
       if (error.code.includes("not-found")) {
         toast.update(id, {
@@ -116,9 +106,7 @@ function Login() {
         </div>
       </nav>
       <div className="flex px-4 lg:px-0 justify-center mt-6 flex-col max-w-sm mx-auto">
-        <h1 className="text-3xl font-semibold text-center">
-          Selamat Datang Back!
-        </h1>
+        <h1 className="text-3xl font-semibold text-center">Welcom Back!</h1>
 
         {/* Form Login Biasa */}
         <form className="flex flex-col mt-6 gap-3" onSubmit={loginHandler}>
@@ -146,15 +134,9 @@ function Login() {
               loading && "opacity-75"
             }`}
           >
-            Masuk Sekarang
+            Login Now
           </button>
         </form>
-        <p className="opacity-80 text-center my-5 font-medium  overflow-hidden before:h-[1.5px] after:h-[1.5px] after:bg-gray-300 after:inline-block after:relative after:align-middle after:w-1/4 before:bg-gray-300 before:inline-block before:relative before:align-middle before:w-1/4 before:right-2 after:left-2">
-          atau lanjut dengan
-        </p>
-
-        {/* Google Login */}
-        <GoogleLogin />
       </div>
     </>
   );
