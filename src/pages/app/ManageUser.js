@@ -1,42 +1,18 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Line, Pie } from "react-chartjs-2";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../atoms/authToken";
 import { userState } from "../../atoms/userAtom";
 import NavbarAdmin from "../../components/NavbarAdmin";
-import VerificationReminder from "../../components/VerificationReminder";
-import { toast } from "react-toastify";
+import { options, optionsChart } from "../../components/SalesChart";
 import StatistikAngka from "../../components/StatistikAngka";
-import { options, optionsChart, SalesChart } from "../../components/SalesChart";
 import TopProduct from "../../components/TopProduct";
 import { getRequest } from "../../configs/axios";
-import { authToken } from "../../atoms/authToken";
-import { Line, Pie } from "react-chartjs-2";
-import dayjs from "dayjs";
-// const products = [
-//   {
-//     name: "Nike Air Jordan 1 Mid",
-//     sold: 23,
-//   },
-//   {
-//     name: "Swallow Indomaret",
-//     sold: 20,
-//   },
-//   {
-//     name: "A Bathing Ape",
-//     sold: 18,
-//   },
-//   {
-//     name: "Kaos Catur Bekasi",
-//     sold: 14,
-//   },
-//   {
-//     name: "Jaket Jamet Yoru",
-//     sold: 12,
-//   },
-// ];
 
 function ManageUser() {
   const location = useLocation();
@@ -67,8 +43,6 @@ function ManageUser() {
     labels,
     datasets: [
       {
-        // data: [30000, 36000, 24000, 42000, 38000, 62000, 36000],
-        // data: dataBidders(),
         data: bidders,
         label: "New Auction",
         borderColor: "rgb(147, 51, 234)",
@@ -98,9 +72,7 @@ function ManageUser() {
           };
         });
 
-        // console.log("before data :>> ", filteredData);
         const data = convertedData.slice(0, 5);
-        console.log("data :>> ", data);
         setAuction(data);
 
         const sorted = filteredData.sort((a, b) => {
@@ -130,7 +102,6 @@ function ManageUser() {
 
         const counts = result.map((obj) => obj.count);
 
-        console.log(counts);
         setBidders(counts);
 
         const labels = result.map((item) => {
@@ -185,7 +156,6 @@ function ManageUser() {
   };
 
   useEffect(() => {
-    // if check kalo dia di path "/app" doang bukan di  "app/home"
     if (!location.pathname.includes("/home")) navigate("/app/home");
     try {
       getAuction();

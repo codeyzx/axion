@@ -1,18 +1,13 @@
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import logo from "../assets/axionLogo.svg";
 import { cartCount } from "../atoms/cartAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { storeColor } from "../atoms/storeColor";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { userCustomer } from "../atoms/userCustomer";
-import { useEffect } from "react";
 // import { userState } from "../../../atoms/userAtom";
-import CustomerProfile from "./CustomerProfile";
-import { userState } from "../atoms/userAtom";
 import { getRequest } from "../configs/axios";
+import CustomerProfile from "./CustomerProfile";
 
 function NavbarLayout() {
   const count = useRecoilValue(cartCount);

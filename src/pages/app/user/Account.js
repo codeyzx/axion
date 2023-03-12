@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authToken } from "../../../atoms/authToken";
@@ -141,7 +141,7 @@ function Account() {
                     className={`batalkanBtn ${
                       (loading || !isChange) && "opacity-75"
                     }`}
-                    onClick={() => navigate("/admin/users")}
+                    onClick={() => navigate("/app/settings")}
                     disabled={loading || !isChange}
                   >
                     Cancel
@@ -153,7 +153,7 @@ function Account() {
                       (loading || !isChange) && "opacity-75 hover:bg-purple-600"
                     }`}
                   >
-                    Save User
+                    Save
                   </button>
                 </div>
               </form>

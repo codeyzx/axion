@@ -1,9 +1,7 @@
 import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
-import { signOut } from "firebase/auth";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
 
 function NavbarProfile({ img }) {
   const navigate = useNavigate();

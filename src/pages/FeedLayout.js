@@ -1,24 +1,15 @@
-import React, { useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
-import logo from "../assets/axionIcon.svg";
-import NotFound from "./NotFound";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { firestoreDb } from "../firebase";
-import { useState } from "react";
 import Lottie from "lottie-web";
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import lottieJson from "../assets/97110-purple-spinner.json";
-import NavbarStore from "../components/NavbarStore";
-import { useSetRecoilState } from "recoil";
-import { storeColor } from "../atoms/storeColor";
-import { storeNameAtom } from "../atoms/storeName";
+import logo from "../assets/axionIcon.svg";
 import NavbarLayout from "../components/NavbarLayout";
-import { getRequest } from "../configs/axios";
+import NotFound from "./NotFound";
 
 function FeedLayout() {
   const [status, setStatus] = useState("loading");
   // const { storeName, productId } = useParams();
   // const [store, setStore] = useState(null);
-
 
   // const getStore = async (name) => {
   //   const q = query(
@@ -39,8 +30,6 @@ function FeedLayout() {
   //   const verifed = resJson.emailVerified;
   //   return verifed;
   // };
-
-
 
   useEffect(() => {
     // const lowerName = storeName.toLowerCase();

@@ -1,21 +1,16 @@
 import { Icon } from "@iconify/react";
-import { doc, getDoc } from "firebase/firestore";
 import Lottie from "lottie-web";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import lottieJson from "../assets/97110-purple-spinner.json";
 import logo from "../assets/axionIcon.svg";
+import { authToken } from "../atoms/authToken";
 import { cartState } from "../atoms/cartAtom";
-import { firestoreDb } from "../firebase";
+import { getRequest } from "../configs/axios";
 import rupiahConverter from "../helpers/rupiahConverter";
 import NotFound from "./NotFound";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { addToCart } from "../helpers/helperCart";
-import { toast } from "react-toastify";
-import { getRequest } from "../configs/axios";
-import { authToken } from "../atoms/authToken";
 
 function FeedItem() {
   const [cart, setCart] = useRecoilState(cartState);

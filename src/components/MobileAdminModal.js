@@ -1,11 +1,9 @@
 import { Dialog } from "@headlessui/react";
 import { Icon } from "@iconify/react";
-import { signOut } from "firebase/auth";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { navbarAdmin } from "../atoms/navbarAdmin";
-import { auth } from "../firebase";
 import SidebarItem from "./SidebarItem";
 
 const sidebarItems = [
@@ -39,7 +37,7 @@ const sidebarItems = [
 function MobileAdminModal() {
   const [isOpen, setIsOpen] = useRecoilState(navbarAdmin);
   const locationNow = useLocation();
-  const nav = useNavigate()
+  const nav = useNavigate();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
@@ -83,7 +81,10 @@ function MobileAdminModal() {
                 />
               </div>
             ))}
-            <button onClick={() => nav(`/nyoba`)} className="sidebarItem bg-purple-100 rounded border-[1px] border-purple-600 text-purple-800 font-semibold">
+            <button
+              onClick={() => nav(`/nyoba`)}
+              className="sidebarItem bg-purple-100 rounded border-[1px] border-purple-600 text-purple-800 font-semibold"
+            >
               <Icon icon="akar-icons:eye" width={22} />
               <p>Kunjungi Toko</p>
             </button>

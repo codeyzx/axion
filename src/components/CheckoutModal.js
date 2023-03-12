@@ -5,14 +5,13 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { useState } from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { checkoutModal } from "../atoms/checkoutModalAtom";
-import { auth, googleProvider } from "../firebase";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { userCustomer } from "../atoms/userCustomer";
+import { auth, googleProvider } from "../firebase";
 
 export default function CheckoutModal() {
   const [isOpen, setIsOpen] = useRecoilState(checkoutModal);
@@ -35,7 +34,7 @@ export default function CheckoutModal() {
         uid: user.uid,
         email: user.email,
         nomor: user.phoneNumber ? user.phoneNumber : "",
-        image: user.photoURL ? user.photoURL : null
+        image: user.photoURL ? user.photoURL : null,
       };
       setUser(userNow);
       toast.success("Berhasil Login");
@@ -52,7 +51,7 @@ export default function CheckoutModal() {
         uid: user.uid,
         email: user.email,
         nomor: user.phoneNumber ? user.phoneNumber : "",
-        image: user.photoURL ? user.photoURL : null
+        image: user.photoURL ? user.photoURL : null,
       };
       setUser(userNow);
       toast.success("Berhasil Membuat Akun");
@@ -68,7 +67,7 @@ export default function CheckoutModal() {
       uid: user.uid,
       email: user.email,
       nomor: user.phoneNumber ? user.phoneNumber : "",
-      image: user.photoURL ? user.photoURL : null
+      image: user.photoURL ? user.photoURL : null,
     };
     setUser(userNow);
     toast.success("Berhasil Login");

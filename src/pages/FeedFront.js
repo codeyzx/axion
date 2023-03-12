@@ -1,22 +1,18 @@
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import Lottie from "lottie-web";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import { firestoreDb } from "../firebase";
-import NotFound from "./NotFound";
-import lottieJson from "../assets/97110-purple-spinner.json";
-import logo from "../assets/axionIcon.svg";
-import { Helmet } from "react-helmet-async";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
-import shopee from "../assets/shopee.svg";
-import tokopedia from "../assets/tokopedia.svg";
+import Lottie from "lottie-web";
+import React, { useEffect, useState } from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import lottieJson from "../assets/97110-purple-spinner.json";
+import logo from "../assets/axionIcon.svg";
 import sadFace from "../assets/sadFace.svg";
 import ShopItem from "../components/ShopItem";
-import rupiahConverter from "../helpers/rupiahConverter";
-import CopyToClipboard from "react-copy-to-clipboard";
-import { toast } from "react-toastify";
 import { getRequest } from "../configs/axios";
+import rupiahConverter from "../helpers/rupiahConverter";
+import NotFound from "./NotFound";
 
 function FeedFront() {
   const navigate = useNavigate();

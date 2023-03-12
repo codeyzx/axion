@@ -6,6 +6,6 @@ export default async function sendVerification() {
     await sendEmailVerification(auth.currentUser);
   } catch (err) {
     console.error(err);
-    return err
+    return err;
   }
 }

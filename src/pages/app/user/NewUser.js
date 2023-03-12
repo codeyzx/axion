@@ -1,25 +1,14 @@
 import { Icon } from "@iconify/react";
 import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
-import ProductSwitch from "../../../components/ProductSwitch";
-import { useForm } from "react-hook-form";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
-import { firestoreDb } from "../../../firebase";
-import { toast } from "react-toastify";
-import setFirestoreStorage from "../../../helpers/setFirestoreStorage";
 import { postRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
 
 function NewUser() {
   const {
