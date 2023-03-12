@@ -1,56 +1,42 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
-import Faq from "./pages/Faq";
-import Home from "./pages/Home";
-import Layout from "./pages/app/Layout";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import Signup from "./pages/Signup";
-import ManageOperator from "./pages/app/ManageOperator";
-import ManageUser from "./pages/app/ManageUser";
-import { ToastContainer } from "react-toastify";
-import { RecoilRoot } from "recoil";
-import Onboarding from "./pages/Onboarding";
 import { HelmetProvider } from "react-helmet-async";
-import Orders from "./pages/app/orders/Orders";
-import History from "./pages/app/history/History";
-import Products from "./pages/app/products/Products";
-import Customers from "./pages/app/customers/Customers";
-import NewProduct from "./pages/app/products/NewProduct";
-import NewHistory from "./pages/app/history/NewHistory";
-import NewCustomer from "./pages/app/customers/NewCustomer";
-import EditCustomer from "./pages/app/customers/EditCustomer";
-import EditHistory from "./pages/app/history/EditHistory";
-import EditProduct from "./pages/app/products/EditProduct";
-import Storefront from "./pages/Storefront";
-import StoreItem from "./pages/StoreItem";
-import StoreLayout from "./pages/StoreLayout";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import CheckoutModal from "./components/CheckoutModal";
-import OrderStatus from "./pages/OrderStatus";
-import OrderStatusDetail from "./pages/OrderStatusDetail";
-import EditOrder from "./pages/app/orders/EditOrder";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RecoilRoot } from "recoil";
 import MobileModal from "./components/MobileModal";
 import AdminLayout from "./pages/app/AdminLayout";
-import OperatorLayout from "./pages/app/OperatorLayout";
-import User from "./pages/app/user/User";
-import Account from "./pages/app/user/Account";
-import NewUser from "./pages/app/user/NewUser";
-import EditUser from "./pages/app/user/EditUser";
-import EditRole from "./pages/app/user/EditRole";
-import EditEmail from "./pages/app/user/EditEmail";
-import NewTransaction from "./pages/app/transactions/NewTransaction";
-import EditTransaction from "./pages/app/transactions/EditTransaction";
-import Transactions from "./pages/app/transactions/Transactions";
 import Auctions from "./pages/app/auctions/Auctions";
 import EditAuction from "./pages/app/auctions/EditAuction";
 import NewAuction from "./pages/app/auctions/NewAuction";
-import ViewTransaction from "./pages/app/transactions/ViewTransaction";
+import EditHistory from "./pages/app/history/EditHistory";
+import History from "./pages/app/history/History";
+import NewHistory from "./pages/app/history/NewHistory";
+import Layout from "./pages/app/Layout";
 import ManageAdmin from "./pages/app/ManageAdmin";
+import ManageOperator from "./pages/app/ManageOperator";
+import ManageUser from "./pages/app/ManageUser";
+import OperatorLayout from "./pages/app/OperatorLayout";
+import EditProduct from "./pages/app/products/EditProduct";
+import NewProduct from "./pages/app/products/NewProduct";
+import Products from "./pages/app/products/Products";
+import EditTransaction from "./pages/app/transactions/EditTransaction";
+import NewTransaction from "./pages/app/transactions/NewTransaction";
+import Transactions from "./pages/app/transactions/Transactions";
+import ViewTransaction from "./pages/app/transactions/ViewTransaction";
+import Account from "./pages/app/user/Account";
+import EditEmail from "./pages/app/user/EditEmail";
+import EditRole from "./pages/app/user/EditRole";
+import EditUser from "./pages/app/user/EditUser";
+import NewUser from "./pages/app/user/NewUser";
+import User from "./pages/app/user/User";
+import Faq from "./pages/Faq";
 import FeedFront from "./pages/FeedFront";
-import FeedLayout from "./pages/FeedLayout";
 import FeedItem from "./pages/FeedItem";
+import FeedLayout from "./pages/FeedLayout";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -58,11 +44,10 @@ function App() {
       <RecoilRoot>
         <ToastContainer />
         <BrowserRouter>
-          <CheckoutModal />
+          {/* <CheckoutModal /> */}
           <MobileModal />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="feed"> */}
             <Route path="feed" element={<FeedLayout />}>
               <Route index element={<FeedFront />} />
               <Route path=":productId" element={<FeedItem />} />
@@ -70,18 +55,18 @@ function App() {
             <Route path="faq" element={<Faq />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="onboarding" element={<Onboarding />} />
-            <Route path="cart" element={<Cart />} />
+            {/* <Route path="onboarding" element={<Onboarding />} /> */}
+            {/* <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="order-status" element={<OrderStatus />} />
-            <Route
+            <Route path="order-status" element={<OrderStatus />} /> */}
+            {/* <Route
               path="order-status/:orderId"
               element={<OrderStatusDetail />}
-            />
-            <Route path=":storeName" element={<StoreLayout />}>
+            /> */}
+            {/* <Route path=":storeName" element={<StoreLayout />}>
               <Route index element={<Storefront />} />
               <Route path=":productId" element={<StoreItem />} />
-            </Route>
+            </Route> */}
             <Route path="app" element={<Layout />}>
               <Route index element={<ManageUser />} />
               <Route path="home" element={<ManageUser />} />
@@ -93,7 +78,8 @@ function App() {
               <Route path="products/:id" element={<EditProduct />} />
               <Route path="transactions" element={<Transactions />} />
               <Route path="transactions/:id" element={<ViewTransaction />} />
-              <Route path="orders" element={<Orders />} />
+              <Route path="settings" element={<Account />} />
+              {/* <Route path="orders" element={<Orders />} />
               <Route path="orders/:id" element={<EditOrder />} />
               <Route path="history" element={<History />} />
               <Route path="history/new" element={<NewHistory />} />
@@ -101,7 +87,7 @@ function App() {
               <Route path="customers" element={<Customers />} />
               <Route path="customers/new" element={<NewCustomer />} />
               <Route path="customers/:id" element={<EditCustomer />} />
-              <Route path="settings" element={<Account />} />
+              <Route path="settings" element={<Account />} /> */}
             </Route>
             <Route path="operator" element={<OperatorLayout />}>
               <Route index element={<ManageOperator />} />

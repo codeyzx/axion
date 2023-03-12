@@ -1,84 +1,80 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
 import logo from "../assets/axionLogo.svg";
-import GoogleLogin from "../components/GoogleLogin";
-import { auth, firestoreDb } from "../firebase";
-import checkStoreNameAvailability from "../helpers/checkStoreNameAvailability";
-import sendVerification from "../helpers/sendVerification";
+import { authToken } from "../atoms/authToken";
+import { userState } from "../atoms/userAtom";
+import { postRequest } from "../configs/axios";
 
 function Signup() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setUser] = useRecoilState(userState);
+  const [, setToken] = useRecoilState(authToken);
+
   const navigate = useNavigate();
-  const [storeName, setStoreName] = useState(
-    searchParams.get("name") ? searchParams.get("name") : ""
-  );
   const [loading, setLoading] = useState(false);
+  const nameRef = useRef();
   const emailRef = useRef();
   const passRef = useRef();
+  const addressRef = useRef();
+  const phoneRef = useRef();
 
   const signupHandler = async (ev) => {
     ev.preventDefault();
     const id = toast.loading("Tolong tunggu...");
     setLoading(true);
-    const storeLower = storeName.toLowerCase();
     try {
-      const isAvailable = await checkStoreNameAvailability(storeName);
-      if (isAvailable > 0) {
+      const registerReq = await postRequest("register", {
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        password: passRef.current.value,
+        address: addressRef.current.value,
+        phone: phoneRef.current.value,
+        role: "Users",
+      });
+      if (registerReq.status === 200) {
+        const tokenReq = await postRequest("login", {
+          email: emailRef.current.value,
+          password: passRef.current.value,
+        });
+        if (tokenReq.status === 200) {
+          setToken(tokenReq.data["token"]);
+          setUser(tokenReq.data["user"]);
+
+          localStorage.setItem("token", tokenReq.data["token"]);
+          localStorage.setItem("user", JSON.stringify(tokenReq.data["user"]));
+
+          toast.update(id, {
+            render: "Sukses, Selamat Datang!",
+            type: "success",
+            isLoading: false,
+            autoClose: 2000,
+          });
+          if (tokenReq.data["user"]["role"] === "Admin") {
+            navigate("/admin/home");
+          } else if (tokenReq.data["user"]["role"] === "Operator") {
+            navigate("/operator/home");
+          } else {
+            navigate("/app/home");
+          }
+        } else {
+          toast.update(id, {
+            render: "Email atau password salah",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          });
+        }
+      } else {
         toast.update(id, {
-          render: "Nama sudah dipakai, silahkan ganti",
+          render: "Terjadi Error",
           type: "error",
           isLoading: false,
           autoClose: 3000,
         });
-        return;
       }
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passRef.current.value
-      );
-      const user = userCred.user;
-      const username = user.email.split("@")[0];
-      await updateProfile(user, {
-        photoURL: "gs://axion-77995.appspot.com/defaultImage.png",
-        displayName: username,
-      });
-      await setDoc(doc(firestoreDb, "users", user.uid), {
-        userId: user.uid,
-        email: user.email,
-        username: username,
-        userImg: `https://avatars.dicebear.com/api/micah/${username}.svg`,
-        createdAt: serverTimestamp(),
-      });
-      await updateProfile(user, {
-        displayName: username,
-        photoURL: `https://avatars.dicebear.com/api/micah/${username}.svg`,
-      });
-      await addDoc(collection(firestoreDb, "stores"), {
-        userId: user.uid,
-        profileImg:
-          "https://firebasestorage.googleapis.com/v0/b/axion-77995.appspot.com/o/svgDefault.svg?alt=media&token=2f08d0c9-8555-4376-8d1d-a1f60e76b4af",
-        storeName: storeName,
-        storeNameLowercase: storeLower,
-        storeBio: null,
-        storeTime: ["00:00", "00:00"],
-        visited: 0,
-        links: {},
-        colorTheme: "purple",
-        coverImg: null,
-        createdAt: serverTimestamp(),
-      });
-      sendVerification();
+
       toast.update(id, {
         render: "Sukses, Selamat Datang!",
         type: "success",
@@ -134,21 +130,14 @@ function Signup() {
 
         {/* Form Signup Biasa */}
         <form className="flex flex-col mt-6 gap-3" onSubmit={signupHandler}>
-          {/* Input nama toko */}
-          <div className="inputStyle">
-            <p>axions.vercel.app/</p>
-            <input
-              type="text"
-              disabled={loading}
-              required
-              placeholder="tokokamu"
-              value={storeName}
-              pattern="^[0-9a-zA-Z]+$"
-              errorMessage="Only Accept Letter and Number"
-              onChange={(ev) => setStoreName(ev.target.value)}
-              className="required outline-none font-medium w-4/5"
-            />
-          </div>
+          <input
+            type="text"
+            required
+            disabled={loading}
+            placeholder="Name"
+            className="inputStyle"
+            ref={nameRef}
+          />
           <input
             type="email"
             required
@@ -166,6 +155,20 @@ function Signup() {
             className="inputStyle"
             ref={passRef}
           />
+          <input
+            type="number"
+            disabled={loading}
+            placeholder="Phone"
+            className="inputStyle"
+            ref={phoneRef}
+          />
+          <input
+            type="text"
+            disabled={loading}
+            placeholder="Address"
+            className="inputStyle"
+            ref={addressRef}
+          />
           <button
             type="submit"
             disabled={loading}
@@ -176,12 +179,6 @@ function Signup() {
             Daftar
           </button>
         </form>
-        <p className="opacity-80 text-center my-5 font-medium  overflow-hidden before:h-[1.5px] after:h-[1.5px] after:bg-gray-300 after:inline-block after:relative after:align-middle after:w-1/4 before:bg-gray-300 before:inline-block before:relative before:align-middle before:w-1/4 before:right-2 after:left-2">
-          atau lanjut dengan
-        </p>
-
-        {/* Google Login */}
-        <GoogleLogin />
       </div>
     </>
   );
