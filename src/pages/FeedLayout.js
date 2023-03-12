@@ -71,7 +71,6 @@ function FeedLayout() {
   }, []);
 
   useEffect(() => {
-    // console.count("loaded")
     const instance = Lottie.loadAnimation({
       container: document.querySelector("#lottie-container"),
       animationData: lottieJson,
