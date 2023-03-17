@@ -1,15 +1,15 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { getRequest, postRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
-import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
 
 function NewAuction() {
   const {
@@ -273,12 +273,13 @@ function NewAuction() {
                       <label htmlFor="endAt" className="font-medium">
                         End At
                       </label>
+                      <span className="text-red-600">*</span>
                       <input
                         type="datetime-local"
                         id="endAt"
                         className="addInput"
                         placeholder="End At"
-                        {...register("endAt")}
+                        {...register("endAt", { required: true })}
                       />
                     </div>
 
