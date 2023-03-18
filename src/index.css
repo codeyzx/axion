@@ -223,6 +223,10 @@ body {
   background-color: #ff9b4e;
 }
 
+.gray-btn {
+  background-color: rgba(146, 51, 234, 0.637);
+}
+
 .purple-btn {
   background-color: rgb(147, 51, 234);
 }
