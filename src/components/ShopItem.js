@@ -1,10 +1,11 @@
+import dayjs from "dayjs";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ShopItem({ img, price, name, desc, slug, active, color }) {
-  const navigate = useNavigate()
+function ShopItem({ img, price, name, desc, date, slug, active, color }) {
+  const navigate = useNavigate();
   const clickHandler = () => {
-    navigate(slug)
+    navigate(slug);
   };
 
   return (
@@ -18,8 +19,21 @@ function ShopItem({ img, price, name, desc, slug, active, color }) {
           className="w-full h-full object-cover rounded-t-lg"
           alt=""
           loading="lazy"
-        /> 
-        <div className={`font-semibold text-lg absolute bottom-2 ${color + "-tag"} text-white py-1 px-2 rounded-md  right-2`}>
+        />
+        {date && (
+          <div
+            className={`font-semibold text-sm absolute top-2 ${
+              dayjs(date).isBefore(dayjs()) ? "red-tag" : "green-tag"
+            } text-white py-1 px-2 rounded-md  right-2`}
+          >
+            <p>{dayjs(date).format("DD MMMM YYYY HH:MM")}</p>
+          </div>
+        )}
+        <div
+          className={`font-semibold text-lg absolute bottom-2 ${
+            color + "-tag"
+          } text-white py-1 px-2 rounded-md  right-2`}
+        >
           {active ? <p>{price}</p> : "Sold Out"}
         </div>
       </div>
