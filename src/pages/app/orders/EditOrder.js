@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import dayjs from "dayjs";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -11,13 +12,12 @@ import {
 } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../atoms/userAtom";
-import NavbarAdmin from "../../../components/NavbarAdmin";
-import { firestoreDb } from "../../../firebase";
-import dayjs from "dayjs";
-import rupiahConverter from "../../../helpers/rupiahConverter";
 import CartItem from "../../../components/CartItem";
-import capitalizeFirstLetter from "../../../helpers/capitalizeFirstLetter";
+import NavbarAdmin from "../../../components/NavbarAdmin";
 import TransactionDisclosure from "../../../components/TransactionDisclosure";
+import { firestoreDb } from "../../../firebase";
+import capitalizeFirstLetter from "../../../helpers/capitalizeFirstLetter";
+import rupiahConverter from "../../../helpers/rupiahConverter";
 
 function EditOrder() {
   let { id } = useParams();
@@ -124,7 +124,7 @@ function EditOrder() {
               </div>
               <div className="flex items-center mt-4 gap-5 flex-wrap">
                 <div className="border-r-[1px] border-gray-300 pr-3">
-                  <h6 className="text-sm text-gray-500">Nama</h6>
+                  <h6 className="text-sm text-gray-500">Name</h6>
                   <p className="text-sm">
                     {order.customer.firstname + " " + order.customer.lastname}
                   </p>

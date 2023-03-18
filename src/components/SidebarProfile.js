@@ -1,9 +1,7 @@
 import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
-import { signOut } from "firebase/auth";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
 
 function SidebarProfile({ img, name }) {
   const navigate = useNavigate();
@@ -49,7 +47,7 @@ function SidebarProfile({ img, name }) {
               onClick={logoutHandler}
             >
               <Icon icon="carbon:logout" width="18" />
-              <p className="font-medium">Keluar</p>
+              <p className="font-medium">Exit</p>
             </button>
           )}
         </Menu.Item>

@@ -54,8 +54,8 @@ function Customers() {
         ),
       },
       {
-        Header: "Nama",
-        accessor: "nama",
+        Header: "Name",
+        accessor: "name",
       },
       {
         Header: "Email",
@@ -105,13 +105,13 @@ function Customers() {
           <div className="flex w-full my-2">
             <input
               type="text"
-              placeholder="Cari Kustomer"
+              placeholder="Search Kustomer"
               onChange={handleFilterChange}
               value={filterInput}
               className="w-full focus:border-purple-600 text-sm outline-none border-[1px] border-gray-300 transition-all duration-300 ease-out  rounded p-2"
             />
             {/* <button>
-              Cari
+              Search
             </button> */}
           </div>
 
@@ -126,7 +126,7 @@ function Customers() {
                   columns={columns}
                   data={dataMemo}
                   filterInput={filterInput}
-                  filterColumn="nama"
+                  filterColumn="name"
                 />
               ) : (
                 <EmptyTable columns={columns} />

@@ -93,7 +93,7 @@ function MobileAdminModal() {
               className="sidebarItem bg-red-100 rounded border-[1px] border-red-600 text-red-800 font-semibold"
             >
               <Icon icon="carbon:logout" width="22" />
-              <p>Keluar</p>
+              <p>Exit</p>
             </button>
           </div>
         </Dialog.Panel>

@@ -1,14 +1,14 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { getRequest, postRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
 
 function NewTransaction() {
   const {
@@ -73,7 +73,7 @@ function NewTransaction() {
       await postRequest("auction-histories", json, token);
 
       toast.update(idToast, {
-        render: "Transactions Berhasil Ditambahkan!",
+        render: "Transactions Successfully Added!",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -172,7 +172,7 @@ function NewTransaction() {
                     </span>
                   ) : (
                     <p className="text-xs font-medium text-purple-500">
-                      perhatian jangan menggunakan titik (.)
+                      don't use dots (.)
                     </p>
                   )}
                 </div>

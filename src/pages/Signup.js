@@ -22,7 +22,7 @@ function Signup() {
 
   const signupHandler = async (ev) => {
     ev.preventDefault();
-    const id = toast.loading("Tolong tunggu...");
+    const id = toast.loading("Please wait...");
     setLoading(true);
     try {
       const registerReq = await postRequest("register", {
@@ -46,7 +46,7 @@ function Signup() {
           localStorage.setItem("user", JSON.stringify(tokenReq.data["user"]));
 
           toast.update(id, {
-            render: "Sukses, Selamat Datang!",
+            render: "Success, Welcome!",
             type: "success",
             isLoading: false,
             autoClose: 2000,
@@ -76,7 +76,7 @@ function Signup() {
       }
 
       toast.update(id, {
-        render: "Sukses, Selamat Datang!",
+        render: "Success, Welcome!",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -115,18 +115,18 @@ function Signup() {
         </Link>
         <div>
           <span className="opacity-80 hidden md:inline">
-            Sudah punya akun?{" "}
+            Already have an account?{" "}
           </span>
           <Link
             to="/login"
             className="font-semibold text-purple-600 underline hover:font-bold"
           >
-            Masuk
+            Login
           </Link>
         </div>
       </nav>
       <div className="flex px-4 justify-center mt-6 flex-col max-w-sm mx-auto">
-        <h1 className="text-3xl font-semibold text-center">Daftar Sekarang</h1>
+        <h1 className="text-3xl font-semibold text-center">Register Account</h1>
 
         {/* Form Signup Biasa */}
         <form className="flex flex-col mt-6 gap-3" onSubmit={signupHandler}>
@@ -176,7 +176,7 @@ function Signup() {
               loading && "opacity-75"
             } `}
           >
-            Daftar
+            Register
           </button>
         </form>
       </div>

@@ -1,10 +1,4 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { onboardingState } from "../atoms/onboardingAtom";
-import { auth, firestoreDb } from "../firebase";
-import logo from "../assets/axionLogo.svg";
 import {
   addDoc,
   collection,
@@ -12,9 +6,15 @@ import {
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
-import { toast } from "react-toastify";
-import checkStoreNameAvailability from "../helpers/checkStoreNameAvailability";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useRecoilState } from "recoil";
+import logo from "../assets/axionLogo.svg";
+import { onboardingState } from "../atoms/onboardingAtom";
+import { auth, firestoreDb } from "../firebase";
+import checkStoreNameAvailability from "../helpers/checkStoreNameAvailability";
 
 function Onboarding() {
   const [isOnboarding, setIsOboarding] = useRecoilState(onboardingState);
@@ -38,13 +38,13 @@ function Onboarding() {
   const submitHandler = async (ev) => {
     ev.preventDefault();
     setLoading(true);
-    const id = toast.loading("Tolong tunggu...");
+    const id = toast.loading("Please wait...");
     const storeLower = storeName.toLowerCase();
     try {
       const isAvailable = await checkStoreNameAvailability(storeName);
       if (isAvailable > 0) {
         toast.update(id, {
-          render: "Nama sudah dipakai, silahkan ganti",
+          render: "Name sudah dipakai, silahkan ganti",
           type: "error",
           isLoading: false,
           autoClose: 3000,
@@ -74,7 +74,7 @@ function Onboarding() {
       });
       setIsOboarding(false);
       toast.update(id, {
-        render: "Sukses, Selamat Datang!",
+        render: "Success, Welcome!",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -110,7 +110,7 @@ function Onboarding() {
           💡 Kamu bisa mengganti hal-hal dibawah nanti
         </div>
         <div>
-          <p className="mb-1 font-semibold">Nama</p>
+          <p className="mb-1 font-semibold">Name</p>
           <div className="inputStyle">
             <p>axions.vercel.app/</p>
             <input

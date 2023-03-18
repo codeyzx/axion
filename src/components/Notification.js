@@ -15,7 +15,7 @@ function Notification() {
       </Menu.Button>
       <Menu.Items className="absolute right-0 flex flex-col py-1 rounded bg-white gap-[2px] mt-1 w-72 shadowProfile text-[13px] z-10">
         <div className="px-3 py-2">
-          <h5 className="font-semibold">Notifikasi</h5>
+          <h5 className="font-semibold">Notification</h5>
         </div>
         <Menu.Item>
           {({ active }) => (
@@ -29,8 +29,8 @@ function Notification() {
                 <Icon icon="carbon:shopping-cart" width="18" />
               </div>
               <div>
-                <p className="font-medium">Ada 1 orderan baru</p>
-                <p className="text-xs text-gray-600">1 jam lalu</p>
+                <p className="font-medium">2 New bidders</p>
+                <p className="text-xs text-gray-600">1 hours ago</p>
               </div>
             </div>
           )}
@@ -47,8 +47,8 @@ function Notification() {
                 <Icon icon="carbon:shopping-cart" width="18" />
               </div>
               <div>
-                <p className="font-medium">Ada 3 orderan baru</p>
-                <p className="text-xs text-gray-600">2 hari lalu</p>
+                <p className="font-medium">New 1 Bidders</p>
+                <p className="text-xs text-gray-600">2 days ago</p>
               </div>
             </div>
           )}

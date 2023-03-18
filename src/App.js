@@ -44,7 +44,6 @@ function App() {
       <RecoilRoot>
         <ToastContainer />
         <BrowserRouter>
-          {/* <CheckoutModal /> */}
           <MobileModal />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -55,18 +54,6 @@ function App() {
             <Route path="faq" element={<Faq />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
-            {/* <Route path="onboarding" element={<Onboarding />} /> */}
-            {/* <Route path="cart" element={<Cart />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="order-status" element={<OrderStatus />} /> */}
-            {/* <Route
-              path="order-status/:orderId"
-              element={<OrderStatusDetail />}
-            /> */}
-            {/* <Route path=":storeName" element={<StoreLayout />}>
-              <Route index element={<Storefront />} />
-              <Route path=":productId" element={<StoreItem />} />
-            </Route> */}
             <Route path="app" element={<Layout />}>
               <Route index element={<ManageUser />} />
               <Route path="home" element={<ManageUser />} />
@@ -79,15 +66,6 @@ function App() {
               <Route path="transactions" element={<Transactions />} />
               <Route path="transactions/:id" element={<ViewTransaction />} />
               <Route path="settings" element={<Account />} />
-              {/* <Route path="orders" element={<Orders />} />
-              <Route path="orders/:id" element={<EditOrder />} />
-              <Route path="history" element={<History />} />
-              <Route path="history/new" element={<NewHistory />} />
-              <Route path="history/:id" element={<EditHistory />} />
-              <Route path="customers" element={<Customers />} />
-              <Route path="customers/new" element={<NewCustomer />} />
-              <Route path="customers/:id" element={<EditCustomer />} />
-              <Route path="settings" element={<Account />} /> */}
             </Route>
             <Route path="operator" element={<OperatorLayout />}>
               <Route index element={<ManageOperator />} />

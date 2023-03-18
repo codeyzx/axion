@@ -1,15 +1,15 @@
 import { Icon } from "@iconify/react";
 import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { postRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
 
 function NewProduct() {
   const {
@@ -59,7 +59,7 @@ function NewProduct() {
       await postRequest("products", json, token);
 
       toast.update(idToast, {
-        render: "Products Berhasil Ditambahkan!",
+        render: "Products Successfully Added!",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -148,7 +148,7 @@ function NewProduct() {
                 </span>
               ) : (
                 <p className="text-xs font-medium text-purple-500">
-                  perhatian jangan menggunakan titik (.)
+                  don't use dots (.)
                 </p>
               )}
             </div>

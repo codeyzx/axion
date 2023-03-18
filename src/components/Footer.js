@@ -1,5 +1,5 @@
-import React from "react";
 import { Icon } from "@iconify/react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/axionLogo.svg";
 
@@ -41,7 +41,7 @@ function Footer() {
           <Icon icon="lucide:twitter" width="26" />
         </a>
         <a
-          href="https://github.com/emrsyah"
+          href="https://github.com/codeyzx/axion"
           className="hover:text-purple-600"
           target="_blank"
           rel="noreferrer"

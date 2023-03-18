@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import profile from "../assets/profile-picture.jpg";
 
 function CustomerProfile({ user, color }) {
   // const setIsOpen = useSetRecoilState(checkoutModal);
@@ -35,7 +36,8 @@ function CustomerProfile({ user, color }) {
         {user ? (
           <img
             // src={user.image}
-            src="https://picsum.photos/200/300.jpg"
+            // src="../assets/profile-picture.jpg"
+            src={profile}
             className="w-8 h-8 rounded-full"
             alt="profile img"
           />

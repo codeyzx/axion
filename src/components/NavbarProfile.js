@@ -3,7 +3,8 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function NavbarProfile({ img }) {
+import profile from "../assets/profile-picture.jpg";
+function NavbarProfile() {
   const navigate = useNavigate();
   const logoutHandler = async () => {
     try {
@@ -18,7 +19,12 @@ function NavbarProfile({ img }) {
   return (
     <Menu className="relative" as="div">
       <Menu.Button className="flex rounded-full hover:scale-105 transition-all ease-out duration-100 p-[2px] border-2 border-purple-500 hover:border-purple-700 items-center gap-2 cursor-pointer w-full">
-        <img src={img} className="w-8 h-8 rounded-full" alt="profile img" />
+        <img
+          // src={"../assets/profile-picture.jpg"}
+          src={profile}
+          className="w-8 h-8 rounded-full"
+          alt="profile img"
+        />
       </Menu.Button>
       <Menu.Items className="absolute right-0 flex flex-col py-2 rounded bg-white gap-[2px] mt-1 w-36 shadowProfile text-sm font-medium z-10">
         <Menu.Item>
@@ -41,7 +47,7 @@ function NavbarProfile({ img }) {
               onClick={logoutHandler}
             >
               <Icon icon="carbon:logout" width="18" />
-              <p className="font-medium">Keluar</p>
+              <p className="font-medium">Exit</p>
             </button>
           )}
         </Menu.Item>

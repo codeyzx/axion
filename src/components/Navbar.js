@@ -76,10 +76,10 @@ function Navbar() {
         ) : (
           <div className="flex items-center justify-between gap-4">
             <Link to="/login" className="btnSecondary">
-              Masuk
+              Login
             </Link>
             <Link to="/signup" className="btnPrimary">
-              Daftar Sekarang
+              Register
             </Link>
           </div>
         )}

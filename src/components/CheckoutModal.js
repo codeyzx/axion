@@ -126,7 +126,7 @@ export default function CheckoutModal() {
               />
             </div>
             <button className="btnPrimary py-[6px]" type="submit">
-              {mode === "login" ? "Masuk" : "Daftar"}
+              {mode === "login" ? "Login" : "Register"}
             </button>
           </form>
           <p className="text-center my-3 text-sm text-gray-700">
@@ -137,26 +137,26 @@ export default function CheckoutModal() {
             className="border-2 w-full border-gray-300 gap-3 rounded-full p-2 font-semibold items-center flex justify-center transition-all duration-300 hover:border-purple-600 cursor-pointer"
           >
             <Icon icon="flat-color-icons:google" width="24" />
-            <p>Masuk dengan Google</p>
+            <p>Login dengan Google</p>
           </button>
           {mode === "login" ? (
             <p className="text-center mt-3 text-sm text-gray-700">
-              Belum punya akun?{" "}
+              Don't have an account?{" "}
               <span
                 className="text-purple-600 font-semibold underline cursor-pointer"
                 onClick={() => setMode("daftar")}
               >
-                Daftar
+                Register
               </span>
             </p>
           ) : (
             <p className="text-center mt-3 text-sm text-gray-700">
-              Sudah punya akun?{" "}
+              Already have an account?{" "}
               <span
                 className="text-purple-600 font-semibold underline cursor-pointer"
                 onClick={() => setMode("login")}
               >
-                Masuk
+                Login
               </span>
             </p>
           )}

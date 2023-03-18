@@ -88,7 +88,7 @@ function Auctions() {
       user.role.toLowerCase() === "users"
         ? [
             {
-              Header: "Nama",
+              Header: "Name",
               accessor: "name",
               Cell: ({ cell: { value } }) => (
                 <p className={`max-w-[100px]`}>{value}</p>
@@ -143,7 +143,7 @@ function Auctions() {
                   />
                 ) : (
                   <img
-                    src={"https://picsum.photos/200/300.jpg"}
+                    src="https://picsum.photos/200/300.jpg"
                     alt="productImg"
                     className="h-16 w-16 object-cover"
                   />
@@ -159,7 +159,7 @@ function Auctions() {
           ]
         : [
             {
-              Header: "Nama",
+              Header: "Name",
               accessor: "name",
               Cell: ({ cell: { value } }) => (
                 <p className={`max-w-[100px]`}>{value}</p>

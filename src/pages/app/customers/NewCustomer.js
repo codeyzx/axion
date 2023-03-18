@@ -26,14 +26,14 @@ function NewCustomer() {
     try {
       await addDoc(collection(firestoreDb, "customers"), {
         storeId: store.id,
-        nama: data.nama,
+        name: data.name,
         email: data.email,
         nomor: data.telepon,
         domisili: data.domisili,
         jumlahOrder: parseInt(data.jumlah),
         createdAt: serverTimestamp(),
       });
-      toast.success("Data Berhasil Ditambahkan");
+      toast.success("Data Successfully Added");
       navigate("/app/customers");
     } catch (err) {
       console.error(err);
@@ -66,19 +66,19 @@ function NewCustomer() {
             onSubmit={handleSubmit(submitHandler)}
           >
             <div>
-              <label htmlFor="nama" className="font-medium">
-                Nama<span className="text-red-600">*</span>
+              <label htmlFor="name" className="font-medium">
+                Name<span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
-                id="nama"
+                id="name"
                 className="addInput"
                 placeholder="John Doe"
-                {...register("nama", { required: true })}
+                {...register("name", { required: true })}
               />
-              {errors.nama && (
+              {errors.name && (
                 <span className="text-[13px] ml-1 text-red-500">
-                  nama harus diisi
+                  name harus diisi
                 </span>
               )}
             </div>

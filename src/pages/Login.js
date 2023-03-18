@@ -19,7 +19,7 @@ function Login() {
 
   const loginHandler = async (ev) => {
     ev.preventDefault();
-    const id = toast.loading("Tolong tunggu...");
+    const id = toast.loading("Please wait...");
     setLoading(true);
     try {
       const tokenReq = await postRequest("login", {
@@ -34,7 +34,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(tokenReq.data["user"]));
 
         toast.update(id, {
-          render: "Sukses, Selamat Datang!",
+          render: "Success, Welcome!",
           type: "success",
           isLoading: false,
           autoClose: 2000,
@@ -95,18 +95,18 @@ function Login() {
         </Link>
         <div>
           <span className="opacity-80 hidden md:inline">
-            Belum punya akun?{" "}
+            Don't have an account?{" "}
           </span>
           <Link
             to="/signup"
             className="font-semibold text-purple-600 underline hover:font-bold"
           >
-            Daftar
+            Register
           </Link>
         </div>
       </nav>
       <div className="flex px-4 lg:px-0 justify-center mt-6 flex-col max-w-sm mx-auto">
-        <h1 className="text-3xl font-semibold text-center">Welcom Back!</h1>
+        <h1 className="text-3xl font-semibold text-center">Welcome Back!</h1>
 
         {/* Form Login Biasa */}
         <form className="flex flex-col mt-6 gap-3" onSubmit={loginHandler}>
@@ -134,7 +134,7 @@ function Login() {
               loading && "opacity-75"
             }`}
           >
-            Login Now
+            Login
           </button>
         </form>
       </div>

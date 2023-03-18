@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -68,7 +68,7 @@ function EditCustomer() {
     try {
       await updateDoc(doc(firestoreDb, "customers", id), {
         storeId: store.id,
-        nama: data.nama,
+        name: data.name,
         email: data.email,
         nomor: data.telepon,
         domisili: data.domisili,
@@ -111,20 +111,20 @@ function EditCustomer() {
                 onChange={changeHandler}
               >
                 <div>
-                  <label htmlFor="nama" className="font-medium">
-                    Nama<span className="text-red-600">*</span>
+                  <label htmlFor="name" className="font-medium">
+                    Name<span className="text-red-600">*</span>
                   </label>
                   <input
                     type="text"
-                    id="nama"
+                    id="name"
                     className="addInput"
                     placeholder="John Doe"
-                    {...register("nama", { required: true })}
-                    defaultValue={customer?.nama}
+                    {...register("name", { required: true })}
+                    defaultValue={customer?.name}
                   />
-                  {errors.nama && (
+                  {errors.name && (
                     <span className="text-[13px] ml-1 text-red-500">
-                      nama harus diisi
+                      name harus diisi
                     </span>
                   )}
                 </div>

@@ -44,7 +44,7 @@ function NavbarAdmin({ user }) {
         /> */}
         <Notification />
         {/* <img src={user.profileImg} className="w-10 rounded-full" alt="" /> */}
-        <NavbarProfile img={"https://picsum.photos/200/300.jpg"} />
+        <NavbarProfile />
       </div>
     </nav>
   );

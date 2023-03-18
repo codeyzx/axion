@@ -3,9 +3,9 @@ import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import imgPlaceholder from "../../../assets/imgPlaceholder.svg";
 
 function NewOrder() {
   const user = useRecoilValue(userState);
@@ -43,12 +43,12 @@ function NewOrder() {
           <h1 className="pageName mb-6">Orderan Baru</h1>
           <form className="flex flex-col gap-4" onSubmit={submitHandler}>
             <div>
-              <label htmlFor="nama" className="font-medium">
-                Nama Produk<span className="text-red-600">*</span>
+              <label htmlFor="name" className="font-medium">
+                Name Produk<span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
-                id="nama"
+                id="name"
                 className="addInput"
                 placeholder="Sunflower Bouquet"
                 required
@@ -79,7 +79,7 @@ function NewOrder() {
                 required
               />
               <p className="text-xs font-medium text-purple-500">
-                perhatian jangan menggunakan titik (.)
+                don't use dots (.)
               </p>
             </div>
             <div>

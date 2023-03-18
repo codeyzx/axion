@@ -1,19 +1,19 @@
-import React, { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
-import { v4 as uuidv4 } from "uuid";
+import { doc, updateDoc } from "firebase/firestore";
+import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 import { userState } from "../../atoms/userAtom";
+import ColorThemeRadio from "../../components/ColorThemeRadio";
 import NavbarAdmin from "../../components/NavbarAdmin";
 import VerificationReminder from "../../components/VerificationReminder";
-import { useForm } from "react-hook-form";
-import checkStoreNameAvailability from "../../helpers/checkStoreNameAvailability";
-import { doc, updateDoc } from "firebase/firestore";
 import { firestoreDb } from "../../firebase";
+import checkStoreNameAvailability from "../../helpers/checkStoreNameAvailability";
 import setFirestoreStorage from "../../helpers/setFirestoreStorage";
-import { toast } from "react-toastify";
-import ColorThemeRadio from "../../components/ColorThemeRadio";
 
 function Setting() {
   const {
@@ -63,9 +63,9 @@ function Setting() {
 
   const submitHandler = async (data) => {
     setLoading(true);
-    const id = toast.loading("Tolong tunggu...");
+    const id = toast.loading("Please wait...");
     try {
-      // If Check misalnya dia ganti nama
+      // If Check misalnya dia ganti name
       if (data.storeName.toLowerCase() !== store.storeNameLowercase) {
         const isAvailable = await checkStoreNameAvailability(data.storeName);
         if (isAvailable) {
@@ -197,7 +197,7 @@ function Setting() {
 
               {/* Image Input */}
               <div className="mt-3">
-                <label htmlFor="nama" className="font-semibold">
+                <label htmlFor="name" className="font-semibold">
                   Foto
                 </label>
                 <div className="flex items-center gap-4">
@@ -235,14 +235,14 @@ function Setting() {
 
               {/* Name Input */}
               <div>
-                <label htmlFor="nama" className="font-medium">
-                  Nama Toko
+                <label htmlFor="name" className="font-medium">
+                  Name Toko
                 </label>
                 <div className="addInput mb-0 p-0 pl-3 items-center">
                   <p>axions.vercel.app/</p>
                   <input
                     type="text"
-                    id="nama"
+                    id="name"
                     placeholder="John Doe"
                     className="py-2 outline-none w-full"
                     defaultValue={store?.storeName}
@@ -251,12 +251,12 @@ function Setting() {
                 </div>
                 {errors.storeName && (
                   <span className="text-[13px] ml-1 text-red-500">
-                    nama harus diisi
+                    name harus diisi
                   </span>
                 )}
                 {nameUsed && (
                   <span className="text-[13px] ml-1 text-red-500">
-                    nama sudah terpakai, silahkan ganti
+                    name sudah terpakai, silahkan ganti
                   </span>
                 )}
               </div>

@@ -14,7 +14,7 @@ function EmptyTable({ columns }) {
           </tr>
         </thead>
       </table>
-      <p className="text-sm text-center text-gray-600">Belum Ada Data</p>
+      <p className="text-sm text-center text-gray-600">Data not available</p>
     </>
   );
 }

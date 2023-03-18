@@ -106,7 +106,7 @@ function NewAuction() {
       await postRequest("auctions", json, token);
 
       toast.update(idToast, {
-        render: "Auctions Berhasil Ditambahkan!",
+        render: "Auctions Successfully Added!",
         type: "success",
         isLoading: false,
         autoClose: 2000,
@@ -216,7 +216,7 @@ function NewAuction() {
                           </span>
                         ) : (
                           <p className="text-xs font-medium text-purple-500">
-                            perhatian jangan menggunakan titik (.)
+                            don't use dots (.)
                           </p>
                         )}
                       </div>
@@ -403,7 +403,7 @@ function NewAuction() {
                           </span>
                         ) : (
                           <p className="text-xs font-medium text-purple-500">
-                            perhatian jangan menggunakan titik (.)
+                            don't use dots (.)
                           </p>
                         )}
                       </div>

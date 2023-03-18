@@ -39,7 +39,7 @@ function NewHistory() {
       // const docRef = await addDoc(collection(firestoreDb, "products"), {
       //   storeId: store.id,
       //   active: enabled,
-      //   name: data.nama,
+      //   name: data.name,
       //   desc: data.deskripsi,
       //   price: data.harga,
       //   sold: 0,
@@ -51,7 +51,7 @@ function NewHistory() {
       // })
       postRequest("history", data, token).catch((err) => console.error(err));
       toast.update(id, {
-        render: "History Berhasil Ditambahkan!",
+        render: "History Successfully Added!",
         type: "success",
         isLoading: false,
         autoClose: 2000,

@@ -1,15 +1,15 @@
+import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { deleteRequest, getRequest, putRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
-import { Menu } from "@headlessui/react";
 
 function EditProduct() {
   let { id } = useParams();
@@ -222,7 +222,7 @@ function EditProduct() {
                     defaultValue={product?.price}
                   />
                   <p className="text-xs font-medium text-purple-500">
-                    perhatian jangan menggunakan titik (.)
+                    don't use dots (.)
                   </p>
                 </div>
                 <div>

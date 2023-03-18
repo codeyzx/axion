@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import SidebarItem from "./SidebarItem";
-import logo from "../assets/axionLogo.svg";
 import { useSetRecoilState } from "recoil";
+import logo from "../assets/axionLogo.svg";
 import { navbarAdmin } from "../atoms/navbarAdmin";
+import SidebarItem from "./SidebarItem";
 
 const sidebarItems = [
   {
@@ -55,7 +55,7 @@ function SidebarUser() {
             /> */}
             <p className="font-medium text-left lg:text-[15px]">
               {/* {store.storeName} */}
-              WellStore
+              Auction Application
             </p>
           </div>
 

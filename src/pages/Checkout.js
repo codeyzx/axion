@@ -1,16 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { Icon } from "@iconify/react";
-import { useForm } from "react-hook-form";
-import { v4 as uuidv4 } from "uuid";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { cartCount, cartState, cartTotal } from "../atoms/cartAtom";
-import rupiahConverter from "../helpers/rupiahConverter";
-import { toast } from "react-toastify";
-import { userCustomer } from "../atoms/userCustomer";
-import { storeNameAtom } from "../atoms/storeName";
 import {
   addDoc,
   collection,
@@ -23,9 +11,19 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { firestoreDb } from "../firebase";
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
+import { cartCount, cartState, cartTotal } from "../atoms/cartAtom";
 import { storeColor } from "../atoms/storeColor";
-import { useState } from "react";
+import { storeNameAtom } from "../atoms/storeName";
+import { userCustomer } from "../atoms/userCustomer";
+import { firestoreDb } from "../firebase";
+import rupiahConverter from "../helpers/rupiahConverter";
 function Checkout() {
   const clientKey = process.env.MIDTRANS_CLIENT_KEY;
   const endpoint = "https://axion-api-production.up.railway.app/charge";
@@ -104,7 +102,7 @@ function Checkout() {
     }
     await addDoc(collection(firestoreDb, "customers"), {
       storeId: storeState.id,
-      nama: `${customer.firstname} ${customer.lastname}`,
+      name: `${customer.firstname} ${customer.lastname}`,
       email: customer.email,
       nomor: customer.phone,
       domisili: customer.alamat,
@@ -113,7 +111,7 @@ function Checkout() {
   };
 
   const submitHandler = async (data) => {
-    const id = toast.loading("Tolong tunggu...");
+    const id = toast.loading("Please wait...");
     const orderId = uuidv4();
     setLoading(true);
     try {
@@ -127,8 +125,8 @@ function Checkout() {
       });
       const customerData = {
         email: data.email,
-        firstname: data.nama1,
-        lastname: data.nama2,
+        firstname: data.name1,
+        lastname: data.name2,
         phone: data.nomor.toString(),
       };
       const bodyRequest = {
@@ -241,33 +239,33 @@ function Checkout() {
               </div>
               <div className="flex flex-col gap-[2px]">
                 <p className="text-gray-700 text-[15px] font-medium">
-                  Nama Depan<span className="text-red-600">*</span>
+                  Name Depan<span className="text-red-600">*</span>
                 </p>
                 <input
                   type="text"
-                  {...register("nama1", { required: true })}
+                  {...register("name1", { required: true })}
                   className="checkoutInput"
                   placeholder="firstname"
                 />
-                {errors.nama1 && (
+                {errors.name1 && (
                   <span className="text-[13px] ml-1 text-red-500">
-                    nama depan harus diisi
+                    name depan harus diisi
                   </span>
                 )}
               </div>
               <div className="flex flex-col gap-[2px]">
                 <p className="text-gray-700 text-[15px] font-medium">
-                  Nama Belakang<span className="text-red-600">*</span>
+                  Name Belakang<span className="text-red-600">*</span>
                 </p>
                 <input
                   type="text"
-                  {...register("nama2", { required: true })}
+                  {...register("name2", { required: true })}
                   className="checkoutInput"
                   placeholder="lastname"
                 />
-                {errors.nama2 && (
+                {errors.name2 && (
                   <span className="text-[13px] ml-1 text-red-500">
-                    nama belakang harus diisi
+                    name belakang harus diisi
                   </span>
                 )}
               </div>
