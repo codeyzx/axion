@@ -2,9 +2,15 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTable, useFilters, useSortBy, usePagination } from "react-table";
+import { useFilters, usePagination, useSortBy, useTable } from "react-table";
 
-export default function Table({ columns, data, filterInput, filterColumn }) {
+export default function Table({
+  columns,
+  data,
+  filterInput,
+  filterColumn,
+  isNavigate,
+}) {
   const navigate = useNavigate();
 
   // Table component logic and UI come here
@@ -30,7 +36,8 @@ export default function Table({ columns, data, filterInput, filterColumn }) {
   }, [filterInput]);
 
   const rowClickHandler = (id) => {
-    navigate(id.toString());
+    // navigate(id.toString());
+    !isNavigate && navigate(id.toString());
   };
 
   return (
