@@ -1,8 +1,8 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/axionLogo.svg";
 import { useSetRecoilState } from "recoil";
+import logo from "../assets/axionLogo.svg";
 import { navbarUser } from "../atoms/navbarUser";
 import { getRequest } from "../configs/axios";
 
@@ -10,6 +10,16 @@ function Navbar() {
   const [userAvailable, setUserAvailable] = useState(false);
   const setIsOpen = useSetRecoilState(navbarUser);
   const users = JSON.parse(localStorage.getItem("user"));
+
+  const path = () => {
+    var entity = "";
+    if (users["role"].toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = users["role"].toLowerCase();
+    }
+    return "/" + entity + "/home";
+  };
 
   const jwtCheck = async () => {
     const token = localStorage.getItem("token");
@@ -56,7 +66,8 @@ function Navbar() {
         {userAvailable ? (
           <Link
             // to="/admin/home"
-            to={"/" + users["role"].toLowerCase() + "/home"}
+            // to={"/" + users["role"].toLowerCase() + "/home"}
+            to={path()}
             className="hidden md:flex py-3 hover:bg-purple-700 hover:px-9 cursor-pointer transition-all duration-200 ease-out font-semibold items-center gap-3 text-white tracking-wider px-6 bg-purple-600 rounded-full"
           >
             <Icon icon="ri:pie-chart-2-fill" width={22} />
@@ -77,8 +88,7 @@ function Navbar() {
       <div className="md:hidden flex items-center gap-5">
         {userAvailable && (
           <Link
-            // to="/admin/home"
-            to={"/" + users["role"].toLowerCase() + "/home"}
+            to={path()}
             className="py-2 hover:bg-purple-700 text-[15px] cursor-pointer transition-all duration-200 ease-out font-semibold items-center gap-3 text-white tracking-wider px-5 bg-purple-600 rounded-full"
           >
             <p>Dashboard</p>
