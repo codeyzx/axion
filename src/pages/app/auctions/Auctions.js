@@ -153,7 +153,7 @@ function Auctions() {
               Header: "End At",
               accessor: "end_at",
               Cell: ({ cell: { value } }) => (
-                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+                <p>{dayjs(value).format("DD MMMM YYYY HH:MM")}</p>
               ),
             },
           ]
@@ -228,7 +228,7 @@ function Auctions() {
               Header: "End At",
               accessor: "end_at",
               Cell: ({ cell: { value } }) => (
-                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+                <p>{dayjs(value).format("DD MMMM YYYY HH:MM")}</p>
               ),
             },
           ],

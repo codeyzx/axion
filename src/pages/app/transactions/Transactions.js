@@ -105,7 +105,7 @@ function Transactions() {
               Header: "Time",
               accessor: "created_at",
               Cell: ({ cell: { value } }) => (
-                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+                <p>{dayjs(value).format("DD MMMM YYYY HH:MM")}</p>
               ),
             },
           ]
@@ -139,7 +139,7 @@ function Transactions() {
               Header: "Time",
               accessor: "created_at",
               Cell: ({ cell: { value } }) => (
-                <p>{dayjs(value).format("DD MMMM YYYY hh:mm a")}</p>
+                <p>{dayjs(value).format("DD MMMM YYYY HH:MM")}</p>
               ),
             },
           ],
