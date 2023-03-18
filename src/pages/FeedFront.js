@@ -1,14 +1,12 @@
 import { Icon } from "@iconify/react";
-import dayjs from "dayjs";
 import Lottie from "lottie-web";
 import React, { useEffect, useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import lottieJson from "../assets/97110-purple-spinner.json";
 import logo from "../assets/axionIcon.svg";
 import sadFace from "../assets/sadFace.svg";
+import CustomerProfile from "../components/CustomerProfile";
 import ShopItem from "../components/ShopItem";
 import { getRequest } from "../configs/axios";
 import rupiahConverter from "../helpers/rupiahConverter";
@@ -17,20 +15,15 @@ import NotFound from "./NotFound";
 function FeedFront() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("loading");
-  // const [products, setProducts] = useState(null);
+  const [userAvailable, setUserAvailable] = useState(false);
   const [auctions, setAuctions] = useState(null);
-  // const [store, setStore] = useOutletContext();
+  const [filterInput, setFilterInput] = useState("");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  // const getProducts = async (id) => {
-  //   const q = query(
-  //     collection(firestoreDb, "products"),
-  //     where("storeId", "==", id),
-  //     orderBy("active", "desc")
-  //   );
-  //   const snapshot = await getDocs(q);
-  //   setProducts(snapshot.docs.length > 0 ? snapshot.docs : null);
-  //   setStatus("finished");
-  // };
+  const handleFilterChange = (e) => {
+    const value = e.target.value || "";
+    setFilterInput(value);
+  };
 
   const getAuctions = async () => {
     await getRequest("auctions")
@@ -43,11 +36,26 @@ function FeedFront() {
       });
   };
 
+  const jwtCheck = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("no token");
+      return;
+    } else {
+      await getRequest("check-jwt", token)
+        .then(() => {
+          setUserAvailable(true);
+        })
+        .catch((err) => {
+          console.log("errrrr: ", err);
+          localStorage.clear();
+        });
+    }
+  };
+
   useEffect(() => {
-    // console.log(storeKu)
-    // setStore(storeKu);
     try {
-      // getProducts(store.id);
+      jwtCheck();
       getAuctions();
     } catch (err) {
       console.error(err);
@@ -75,237 +83,124 @@ function FeedFront() {
     return (
       <>
         <Helmet>
-          {/* <title>{store.storeName} - Axion</title> */}
           <title>Well Store - Axion</title>
         </Helmet>
-        <div className=" poppins">
-          {/* Cover Img */}
-          <div className="mx-0 lg:mx-20 max-w-7xl 2xl:mx-auto xl:mx-36">
-            <img
-              src="https://picsum.photos/200/300.jpg"
-              className="w-full h-44 lg:h-60 m-auto object-cover rounded-b-xl"
-              alt=""
+
+        <nav className="flex 2xl:max-w-7xl 2xl:mx-auto 2xl:px-0 items-center justify-between bg-white z-[49] py-3 px-3 md:px-6 lg:px-16 border-b-gray-200 sticky top-0 border-b-[1px]">
+          <Link to="/">
+            <img src={logo} alt="axion logo" className="w-11/12 md:w-auto" />
+          </Link>
+          <div className="w-full focus:border-purple-600 text-sm outline-none border-[1px] border-gray-300 transition-all duration-300 ease-out rounded p-2 rounded-xl flex w-8/12 my-2">
+            <Icon icon="clarity:search-line" width={17} className="mr-3" />
+            <input
+              type="text"
+              placeholder="Search Auction"
+              onChange={handleFilterChange}
+              value={filterInput}
+              className="w-full focus:outline-none"
             />
-            {/* {store.coverImg ? (
-              <img
-                src={store.coverImg}
-                className="w-full h-44 lg:h-60 m-auto object-cover rounded-b-xl"
-                alt=""
-              />
-            ) : (
+          </div>
+          <div className="flex items-center justify-between gap-8 md:gap-10">
+            <div className="relative cursor-pointer">
               <div
-                className={`w-full h-44 lg:h-60 m-auto object-cover rounded-b-xl ${
-                  store.colorTheme + "-tag"
-                }`}
-              ></div>
-            )} */}
-          </div>
-
-          {/* Header Profile */}
-          <div className="-translate-y-20 xl:px-[152px] xl:mx-auto max-w-7xl 2xl:mx-auto 2xl:px-2 px-2 md:px-6 gap-1 flex flex-col lg:px-[84px] pb-2">
-            <div className="flex items-end justify-between">
-              <img
-                // src={store.profileImg}
-                src="https://picsum.photos/200/300.jpg"
-                className="md:w-32 bg-white md:h-32 w-28 h-28 shadow border-4 border-white rounded-full object-cover "
-                alt="store img"
-              />
-              <div className="col-span-2 ml-auto translate-y-1 md:translate-y-0">
-                <CopyToClipboard
-                  // text={`https://axions.vercel.app/${store.storeName}`}
-                  text={`https://axions.vercel.app/wellstore`}
-                  className="cursor-pointer"
-                  onCopy={() => toast.success("Copied!")}
-                >
-                  <span>
-                    <div
-                      className={`flex items-center w-fit gap-3 py-2 text-white cursor-pointer font-medium rounded-md px-3`}
-                      // store.colorTheme + "-btn"
-                    >
-                      <Icon icon="bi:share-fill" />
-                      <h6 className="hidden md:inline  text-sm">
-                        Bagikan Toko
-                      </h6>
-                    </div>
-                  </span>
-                </CopyToClipboard>
-              </div>
-            </div>
-
-            <h5 className="font-semibold col-span-4 text-2xl">
-              {/* {store.storeName} */}
-              Well Store
-            </h5>
-
-            <div className="flex sm:flex-row items-start sm:items-center flex-col gap-1 sm:gap-5 text-sm text-gray-500">
-              <div className="flex items-center gap-1">
-                <Icon icon="akar-icons:link-chain" width={18} />
-                {/* <p>axions.vercel.app/{store.storeName}</p> */}
-                <p>axions.vercel.app/wellstore</p>
-              </div>
-              <div className="flex items-center gap-1">
-                <Icon icon="ic:outline-access-time" width={18} />
-                <p>
-                  Buka: 09:00 - 17:00
-                  {/* Buka: {store.storeTime ? store.storeTime[0] : "00:00"} -{" "}
-                  {store.storeTime ? store.storeTime[1] : "00:00"} */}
-                </p>
-              </div>
-              <div className="flex items-center gap-1">
-                <Icon icon="ic:baseline-calendar-month" width={18} />
-                <p>
-                  Bergabung{" "}
-                  {/* {dayjs(store.createdAt?.toDate()).format("MMM YYYY")} */}
-                  {dayjs("2021-08-01").format("MMM YYYY")}
-                </p>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-900 my-[6px] max-w-2xl">
-              {/* {store.storeBio} */}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            </p>
-
-            {/* Link2 */}
-            {/* <div className="flex items-center flex-wrap gap-2 text-sm font-medium">
-              {store.links.whatsapp && (
-                <div className={`linkItem ${store.colorTheme + "link"}`}>
-                  <Icon icon="logos:whatsapp" width={24} />
-                  <p>{store.links.whatsapp}</p>
-                </div>
-              )}
-              {store.links.telegram && (
-                <div className={`linkItem ${store.colorTheme + "link"}`}>
-                  <Icon icon="logos:telegram" width={24} />
-                  <p>{store.links.telegram}</p>
-                </div>
-              )}
-              {store.links.shopee && (
-                <a
-                  className={`linkItem ${store.colorTheme + "link"}`}
-                  href={store.links.shopee}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={shopee} className="w-6 h-6" alt="" />
-                  <p>{store.storeName}</p>
-                </a>
-              )}
-              {store.links.tokopedia && (
-                <a
-                  className={`linkItem ${store.colorTheme + "link"}`}
-                  href={store.links.tokopedia}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img
-                    src={tokopedia}
-                    className="w-6 h-6 text-green-600"
-                    alt=""
-                  />
-                  <p>{store.storeName}</p>
-                </a>
-              )}
-              {store.links.instagram && (
-                <a
-                  className={`linkItem ${store.colorTheme + "link"}`}
-                  href={store.links.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Icon
-                    icon="akar-icons:instagram-fill"
-                    className="text-pink-600"
-                    width={24}
-                  />
-                  <p>{store.storeName}</p>
-                </a>
-              )}
-              {store.links.facebook && (
-                <a
-                  className={`linkItem ${store.colorTheme + "link"}`}
-                  href={store.links.facebook}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Icon
-                    icon="akar-icons:facebook-fill"
-                    className="text-blue-600"
-                    width={24}
-                  />
-                  <p>{store.storeName}</p>
-                </a>
-              )}
-            </div> */}
-          </div>
-
-          {/* Line Break */}
-          <div className="shadow w-full -translate-y-20">
-            <p className="opacity-0 cursor-default">Line Breaker</p>
-          </div>
-
-          {/* Shop Container */}
-          <div className="-translate-y-20 max-w-7xl 2xl:mx-auto 2xl:grid-cols-4 mt-6 md:mt-10 mx-2 lg:mx-20 xl:mx-36 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-x-8 md:gap-y-6">
-            {/* Shop Item */}
-            {auctions ? (
-              <>
-                {auctions.map((product) => (
-                  <ShopItem
-                    key={product.id}
-                    slug={product.id.toString()}
-                    name={product.name}
-                    price={rupiahConverter(product.last_price.toString())}
-                    img={
-                      product.product.image
-                        ? "http://127.0.0.1:8080/" + product.product.image
-                        : "https://via.placeholder.com/350x150"
-                    }
-                    desc={product.product.description}
-                    active={true}
-                    // active={product.active}
-                    color="purple"
-                  />
-                ))}
-              </>
-            ) : (
-              <div className="flex flex-col items-center text-center gap-2 col-span-3 2xl:col-span-4 justify-center">
-                <img src={sadFace} alt="no data img" className="w-24" />
-                <div>
-                  <h6 className="font-medium">Belum Ada Produk</h6>
-                  <p className="text-sm text-gray-600">
-                    Pemilik toko belum menambahkan produk, mohon kembali nanti.
-                  </p>
-                </div>
-              </div>
-            )}
-            {/* <ShopItem
-              price="Rp 36.000"
-              name="Novel Milk & Honey"
-              img={product1}
-            />
-            <ShopItem price="Rp 48.000" name="The Black Arts" img={product2} />
-            <ShopItem
-              price="Rp 60.000"
-              name="The Art Of Making Memories"
-              img={product4}
-            />
-            <ShopItem
-              price="Rp 52.000"
-              name="The Golem and The Jinni"
-              img={product3}
-            /> */}
-          </div>
-
-          <div className="mb-10 text-center flex items-center justify-center text-sm">
-            <p>
-              Powered by <br />{" "}
-              <span
-                className="text-2xl font-semibold cursor-pointer text-purple-600"
-                onClick={() => navigate("/")}
+                className={
+                  "purple-btn w-5 h-5 rounded-full absolute -right-[10px] -top-2 text-xs p-2 text-white flex items-center justify-center"
+                }
               >
-                Axion
-              </span>
-            </p>
+                {0}
+              </div>
+              <Icon icon="clarity:shopping-bag-line" width={28} />
+            </div>
+
+            <CustomerProfile
+              user={userAvailable ? user : null}
+              color="purple"
+            />
+          </div>
+        </nav>
+
+        <div className="poppins">
+          <div className="flex-grow flex items-center mt-7 flex-col">
+            <div className="relative mb-2 justify-end flex items-center justify-between gap-4">
+              <p className="font-semibold">Sort:</p>
+              <select
+                className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                onClick={(value) => {
+                  switch (value.target.value) {
+                    case "2":
+                      auctions.sort((a, b) => b.last_price - a.last_price);
+                      setAuctions([...auctions]);
+                      break;
+                    case "3":
+                      auctions.sort((a, b) => b.id - a.id);
+                      setAuctions(null);
+                      setAuctions([...auctions]);
+                      break;
+                    default:
+                      break;
+                  }
+                }}
+              >
+                <option value={1}>Best Fit</option>
+                <option value={2}>Highest Price</option>
+                <option value={3}>Newest</option>
+              </select>
+            </div>
+            <div className="-translate-y-100 max-w-7xl 2xl:mx-auto 2xl:grid-cols-4 mt-50 md:mt-10 mx-2 lg:mx-20 xl:mx-36 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-x-8 md:gap-y-6">
+              {/* Shop Item */}
+              {auctions ? (
+                <>
+                  {auctions
+                    .filter(
+                      (auction) =>
+                        auction.name
+                          .toLowerCase()
+                          .includes(filterInput.toLowerCase()) &&
+                        auction.status.toLowerCase() === "open"
+                    )
+                    .map((auction) => (
+                      <ShopItem
+                        key={auction.id}
+                        slug={auction.id.toString()}
+                        name={auction.name}
+                        date={auction.end_at}
+                        price={rupiahConverter(auction.last_price.toString())}
+                        img={
+                          auction.product.image
+                            ? "http://127.0.0.1:8080/" + auction.product.image
+                            : "https://via.placeholder.com/350x150"
+                        }
+                        desc={auction.product.name}
+                        active={true}
+                        color="purple"
+                      />
+                    ))}
+                </>
+              ) : (
+                <div className="flex flex-col items-center text-center gap-2 col-span-3 2xl:col-span-4 justify-center">
+                  <img src={sadFace} alt="no data img" className="w-24" />
+                  <div>
+                    <h6 className="font-medium">Belum Ada Produk</h6>
+                    <p className="text-sm text-gray-600">
+                      Pemilik toko belum menambahkan produk, mohon kembali
+                      nanti.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="text-center flex items-center justify-center text-sm mt-35">
+              <p>
+                Powered by <br />{" "}
+                <span
+                  className="text-2xl font-semibold cursor-pointer text-purple-600"
+                  onClick={() => navigate("/")}
+                >
+                  Axion
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </>
