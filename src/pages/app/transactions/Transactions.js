@@ -56,7 +56,7 @@ function Transactions() {
           setTransactions(res.data);
         })
         .catch((err) => {
-          console.log("err::::: ", err);
+          console.log(err);
         });
     } else {
       await getRequest(`auction-histories/user/${user.id}`, token)
@@ -64,7 +64,7 @@ function Transactions() {
           setTransactions(res.data["data"]);
         })
         .catch((err) => {
-          console.log("err::::: ", err);
+          console.log(err);
         });
     }
   };

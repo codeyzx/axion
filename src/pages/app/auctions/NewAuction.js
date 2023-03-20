@@ -46,7 +46,6 @@ function NewAuction() {
   const getUsers = async () => {
     await getRequest("users", token)
       .then((res) => {
-        console.log("users:", res.data);
         setUsers(res.data);
       })
       .catch((err) => {
@@ -102,7 +101,6 @@ function NewAuction() {
         bidderId: null,
       };
 
-      console.log("data ", json);
       await postRequest("auctions", json, token);
 
       toast.update(idToast, {

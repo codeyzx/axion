@@ -25,8 +25,6 @@ function Navbar() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      console.log("no token");
-
       return;
     } else {
       await getRequest("check-jwt", token)
@@ -34,7 +32,7 @@ function Navbar() {
           setUserAvailable(true);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
+          console.log(err);
           localStorage.clear();
         });
     }

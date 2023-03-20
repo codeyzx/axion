@@ -123,7 +123,6 @@ function ManageOperator() {
 
         const counts = result.map((obj) => obj.count);
 
-        console.log(counts);
         setBidders(counts);
 
         const labels = result.map((item) => {

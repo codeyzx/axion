@@ -38,7 +38,6 @@ function EditProduct() {
   const getProduct = async () => {
     await getRequest("products/" + id, token)
       .then((res) => {
-        console.log(res);
         setProduct(res.data["data"]);
       })
       .catch((err) => {

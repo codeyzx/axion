@@ -1,4 +1,3 @@
-import { Menu } from "@headlessui/react";
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -9,7 +8,7 @@ import { useRecoilValue } from "recoil";
 import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import { deleteRequest, getRequest, putRequest } from "../../../configs/axios";
+import { getRequest, putRequest } from "../../../configs/axios";
 
 function EditRole() {
   let { id } = useParams();
@@ -27,7 +26,6 @@ function EditRole() {
   const getUser = async () => {
     await getRequest("users/" + id, token)
       .then((res) => {
-        console.log(res);
         setUsers(res.data["data"]);
       })
       .catch((err) => {
@@ -56,9 +54,6 @@ function EditRole() {
   };
 
   const submitHandler = async (data) => {
-    console.log("woyyy");
-    console.log("data : ", data);
-    console.log("token : ", token);
     setLoading(true);
     try {
       await putRequest("users/" + id + "/update-role", data, token);

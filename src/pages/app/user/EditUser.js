@@ -28,12 +28,10 @@ function EditUser() {
   const token = useRecoilValue(authToken);
   const emailNavigate = "/admin/users-email/" + id;
   const roleNavigate = "/admin/users-role/" + id;
-  // const token = localStorage.getItem("token");
 
   const getUser = async () => {
     await getRequest("users/" + id, token)
       .then((res) => {
-        console.log(res);
         setUsers(res.data["data"]);
       })
       .catch((err) => {
@@ -62,9 +60,6 @@ function EditUser() {
   };
 
   const submitHandler = async (data) => {
-    console.log("woyyy");
-    console.log("data : ", data);
-    console.log("token : ", token);
     setLoading(true);
     try {
       await putRequest("users/" + id, data, token);

@@ -17,7 +17,6 @@ function NavbarLayout() {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
     if (!token) {
-      console.log("no token");
       localStorage.clear();
       setToken(null);
       setUser(null);
@@ -30,7 +29,6 @@ function NavbarLayout() {
           setUserAvailable(true);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
           localStorage.clear();
         });
     }

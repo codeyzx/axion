@@ -27,7 +27,6 @@ function NewTransaction() {
   const getAuctions = async () => {
     await getRequest("auctions", token)
       .then((res) => {
-        console.log("auctions:", res.data);
         setAuction(res.data);
       })
       .catch((err) => {
@@ -38,7 +37,6 @@ function NewTransaction() {
   const getUsers = async () => {
     await getRequest("users", token)
       .then((res) => {
-        console.log("users:", res.data);
         setUsers(res.data);
       })
       .catch((err) => {
@@ -69,7 +67,6 @@ function NewTransaction() {
         price: data.price,
       };
 
-      console.log("data ", json);
       await postRequest("auction-histories", json, token);
 
       toast.update(idToast, {

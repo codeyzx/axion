@@ -1,15 +1,13 @@
 import { Icon } from "@iconify/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import NavbarAdmin from "../../../components/NavbarAdmin";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { deleteRequest, getRequest, putRequest } from "../../../configs/axios";
-import { authToken } from "../../../atoms/authToken";
-import { Menu } from "@headlessui/react";
+import { getRequest } from "../../../configs/axios";
 
 function ViewTransaction() {
   let { id } = useParams();
@@ -17,12 +15,8 @@ function ViewTransaction() {
   const { register } = useForm();
   const navigate = useNavigate();
   const user = useRecoilValue(userState);
-  const imgRef = useRef("");
-  const [selectedImage, setSelectedImage] = useState();
-  const [loading, setLoading] = useState(false);
   const [transaction, setTransaction] = useState(null);
   const [firstLoading, setFirstLoading] = useState(true);
-  const [isChange, setIsChange] = useState(false);
   const token = useRecoilValue(authToken);
 
   const getTransaction = async () => {
@@ -31,7 +25,6 @@ function ViewTransaction() {
         var data = res.data["data"];
         var date = new Date(data["created_at"]);
         data["created_at"] = date.toISOString().slice(0, 16).replace("T", " ");
-        console.log(data);
         setTransaction(data);
       })
       .catch((err) => {
@@ -55,12 +48,6 @@ function ViewTransaction() {
       setFirstLoading(false);
     }
   }, []);
-
-  const imageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files[0]);
-    }
-  };
 
   return (
     <>

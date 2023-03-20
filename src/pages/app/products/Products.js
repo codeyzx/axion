@@ -61,7 +61,7 @@ function Products() {
           setProducts(res.data);
         })
         .catch((err) => {
-          console.log("err::::: ", err);
+          console.log(err);
         });
     } else {
       await getRequest("products-by-users/" + user.id)
@@ -73,7 +73,7 @@ function Products() {
           }
         })
         .catch((err) => {
-          console.log("err::::: ", err);
+          console.log(err);
         });
     }
   };

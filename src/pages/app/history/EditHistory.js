@@ -31,7 +31,6 @@ function EditHistory() {
   const getHistory = async () => {
     await getRequest("history/" + id, token)
       .then((res) => {
-        console.log(res);
         setHistory(res.data["data"]);
       })
       .catch((err) => {
@@ -60,8 +59,6 @@ function EditHistory() {
   };
 
   const submitHandler = async (data) => {
-    console.log("data : ", data);
-    console.log("token : ", token);
     setLoading(true);
     try {
       await putRequest("history/" + id, data, token);

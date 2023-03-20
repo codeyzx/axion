@@ -21,7 +21,6 @@ function AdminLayout() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token || user.role !== "Admin") {
-      console.log("no token");
       navigate("/login");
       return;
     } else {
@@ -31,7 +30,7 @@ function AdminLayout() {
           setToken(token);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
+          console.log(err);
           localStorage.clear();
           navigate("/login");
         });

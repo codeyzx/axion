@@ -21,8 +21,6 @@ function OperatorLayout() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token || user.role !== "Operator") {
-      console.log("no token");
-      // localStorage.clear();
       navigate("/login");
       return;
     } else {
@@ -32,7 +30,7 @@ function OperatorLayout() {
           setToken(token);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
+          console.log(err);
           localStorage.clear();
           navigate("/login");
         });

@@ -76,7 +76,6 @@ function FeedItem() {
             userId: user.id,
           };
 
-          console.log("data ", json);
           await postRequest("auction-histories", json, token);
 
           toast.update(idToast, {

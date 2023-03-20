@@ -39,7 +39,6 @@ function FeedFront() {
   const jwtCheck = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.log("no token");
       return;
     } else {
       await getRequest("check-jwt", token)
@@ -47,7 +46,7 @@ function FeedFront() {
           setUserAvailable(true);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
+          console.log(err);
           localStorage.clear();
         });
     }

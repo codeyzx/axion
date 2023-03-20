@@ -44,14 +44,12 @@ function History() {
   };
 
   const getHistory = () => {
-    console.log("token: ", token);
-    console.log("user: ", user);
     getRequest("history", token)
       .then((res) => {
         setHistory(res.data);
       })
       .catch((err) => {
-        console.log("err::::: ", err);
+        console.log(err);
       });
   };
 

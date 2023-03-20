@@ -24,17 +24,11 @@ function EditTransaction() {
   const [isChange, setIsChange] = useState(false);
   const token = useRecoilValue(authToken);
 
-  // const [productName, setProductName] = useState("");
-
   const getTransaction = async () => {
     await getRequest("auction-histories/" + id, token)
       .then((res) => {
-        console.log(res);
         setTransaction(res.data["data"]);
         setUserName(res.data["data"]["user"]["name"]);
-        // setProductName(res.data["data"]["product"]["name"]);
-        // return res.data["data"]["auction"]["product_id"];
-        // getProduct(res.data["data"]["auction"]["product_id"]);
       })
       .catch((err) => {
         console.log(err);
@@ -45,22 +39,6 @@ function EditTransaction() {
         }
       });
   };
-
-  // const getProduct = async (id) => {
-  //   await getRequest("products/" + id, token)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setProductName(res.data["data"]["name"]);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       if (err.response.status === 404) {
-  //         console.error("Product doesnt exist");
-  //         navigate("/admin/transactions");
-  //         return;
-  //       }
-  //     });
-  // };
 
   const changeHandler = () => {
     if (isChange === true) return;
@@ -83,9 +61,6 @@ function EditTransaction() {
     setLoading(true);
     const idToast = toast.loading("Menyimpan Transaction...");
     try {
-      // const formData = new FormData();
-      // formData.append("price", data.price);
-
       const json = {
         price: data.price,
       };

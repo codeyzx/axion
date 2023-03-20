@@ -1,4 +1,3 @@
-// Table.js
 import { Icon } from "@iconify/react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,6 @@ export default function Table({
 }) {
   const navigate = useNavigate();
 
-  // Table component logic and UI come here
   const {
     getTableProps,
     getTableBodyProps,
@@ -30,13 +28,11 @@ export default function Table({
   } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
   useEffect(() => {
-    // console.log(columns, data, filterInput, filterColumn)
     const value = filterInput || "";
     setFilter(filterColumn, value);
   }, [filterInput]);
 
   const rowClickHandler = (id) => {
-    // navigate(id.toString());
     !isNavigate && navigate(id.toString());
   };
 

@@ -21,7 +21,6 @@ function Layout() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token) {
-      console.log("no token");
       navigate("/login");
       return;
     } else {
@@ -31,7 +30,7 @@ function Layout() {
           setToken(token);
         })
         .catch((err) => {
-          console.log("errrrr: ", err);
+          console.log(err);
           localStorage.clear();
           navigate("/login");
         });

@@ -34,7 +34,6 @@ function Account() {
       await putRequest("users/" + users.id, data, token);
       await getRequest("users/" + users.id, token)
         .then((res) => {
-          console.log(res);
           setUsers(res.data["data"]);
           localStorage.setItem("user", JSON.stringify(res.data["data"]));
         })
