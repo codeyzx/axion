@@ -15,7 +15,6 @@ function MobileModal() {
       onClose={() => setIsOpen(false)}
       className="relative z-50 inline md:hidden"
     >
-      {/* The backdrop, rendered as a fixed sibling to the panel container */}
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
       <div className="fixed top-0 right-0 flex justify-end p-3 ml-auto w-full">
@@ -30,7 +29,7 @@ function MobileModal() {
           <div className="w-full my-2 font-medium gap-2 flex flex-col">
             <Link
               to="/"
-              onClick={()=>setIsOpen(false)}
+              onClick={() => setIsOpen(false)}
               className={`py-1 ${
                 locationNow.pathname === "/" && "text-purple-600"
               } `}
@@ -39,7 +38,7 @@ function MobileModal() {
             </Link>
             <Link
               to="/faq"
-              onClick={()=>setIsOpen(false)}
+              onClick={() => setIsOpen(false)}
               className={`py-1 ${
                 locationNow.pathname.includes("/faq") && "text-purple-600"
               } `}
@@ -48,7 +47,7 @@ function MobileModal() {
             </Link>
             <Link
               to="/login"
-              onClick={()=>setIsOpen(false)}
+              onClick={() => setIsOpen(false)}
               className={`py-1 ${
                 locationNow.pathname.includes("/login") && "text-purple-600"
               } `}
@@ -57,7 +56,7 @@ function MobileModal() {
             </Link>
             <Link
               to="/signup"
-              onClick={()=>setIsOpen(false)}
+              onClick={() => setIsOpen(false)}
               className="rounded-3xl flex items-center justify-center mt-3 p-2 text-[15px]  font-medium bg-purple-500 text-white"
             >
               <p>Coba Sekarang - Gratis</p>

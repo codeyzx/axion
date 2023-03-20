@@ -42,7 +42,7 @@ function MobileAdminModal() {
 
   const logoutHandler = async () => {
     try {
-      // signOut(auth);
+      
 
       localStorage.clear();
       navigate("/login");

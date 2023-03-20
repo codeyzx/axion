@@ -4,8 +4,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import defaultImage from "../../../assets/image-not-found.png";
 import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
+
 import EmptyTable from "../../../components/EmptyTable";
 import NavbarAdmin from "../../../components/NavbarAdmin";
 import Table from "../../../components/Table";
@@ -91,13 +93,20 @@ function Products() {
       {
         Header: "Image",
         accessor: "image",
-        Cell: ({ cell: { value } }) => (
-          <img
-            src={"http://127.0.0.1:8080/" + value}
-            alt="productImg"
-            className="h-16 w-16 object-cover"
-          />
-        ),
+        Cell: ({ cell: { value } }) =>
+          value !== "" ? (
+            <img
+              src={"http://127.0.0.1:8080/" + value}
+              alt="productImg"
+              className="h-16 w-16 object-cover"
+            />
+          ) : (
+            <img
+              src={defaultImage}
+              alt="productImg"
+              className="h-16 w-16 object-cover"
+            />
+          ),
       },
       {
         Header: "Name",
@@ -166,7 +175,7 @@ function Products() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadPDF}
                     >
@@ -179,7 +188,7 @@ function Products() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadExcel}
                     >

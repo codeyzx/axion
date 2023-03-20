@@ -37,13 +37,7 @@ function NavbarAdmin({ user }) {
         {greeting.greet} {user.name}
       </h5>
       <div className="flex items-center gap-6">
-        {/* <Icon
-          icon="clarity:notification-outline-badged"
-          width="22"
-          className="text-purple-600 hover:scale-105 transition-all duration-100 ease-out cursor-pointer"
-        /> */}
         <Notification />
-        {/* <img src={user.profileImg} className="w-10 rounded-full" alt="" /> */}
         <NavbarProfile />
       </div>
     </nav>

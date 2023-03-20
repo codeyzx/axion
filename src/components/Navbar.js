@@ -23,12 +23,10 @@ function Navbar() {
 
   const jwtCheck = async () => {
     const token = localStorage.getItem("token");
-    // const user = JSON.parse(localStorage.getItem("user"));
 
-    // if (!token || user.role !== "Admin") {
     if (!token) {
       console.log("no token");
-      // localStorage.clear();
+
       return;
     } else {
       await getRequest("check-jwt", token)
@@ -65,8 +63,6 @@ function Navbar() {
         </NavLink>
         {userAvailable ? (
           <Link
-            // to="/admin/home"
-            // to={"/" + users["role"].toLowerCase() + "/home"}
             to={path()}
             className="hidden md:flex py-3 hover:bg-purple-700 hover:px-9 cursor-pointer transition-all duration-200 ease-out font-semibold items-center gap-3 text-white tracking-wider px-6 bg-purple-600 rounded-full"
           >

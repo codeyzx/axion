@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import defaultImage from "../../../assets/image-not-found.png";
 import { authToken } from "../../../atoms/authToken";
 import { userState } from "../../../atoms/userAtom";
 import EmptyTable from "../../../components/EmptyTable";
@@ -143,7 +144,7 @@ function Auctions() {
                   />
                 ) : (
                   <img
-                    src="https://picsum.photos/200/300.jpg"
+                    src={defaultImage}
                     alt="productImg"
                     className="h-16 w-16 object-cover"
                   />
@@ -218,7 +219,7 @@ function Auctions() {
                   />
                 ) : (
                   <img
-                    src={"https://picsum.photos/200/300.jpg"}
+                    src={defaultImage}
                     alt="productImg"
                     className="h-16 w-16 object-cover"
                   />
@@ -271,7 +272,7 @@ function Auctions() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadPDF}
                     >
@@ -284,7 +285,7 @@ function Auctions() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadExcel}
                     >

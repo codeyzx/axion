@@ -39,7 +39,6 @@ function FeedItem() {
           user.price = transaction[key]["price"];
           users.push(user);
         }
-        // sort users by price
         users.sort((a, b) => b.price - a.price);
         setAuction(data);
         setUsers(users);
@@ -158,20 +157,11 @@ function FeedItem() {
     }
   }, []);
 
-  // const addToCartHandler = () => {
-  //   const newCart = addToCart(cart, { ...product, id: productId }, quantity);
-  //   setCart(newCart);
-  //   setQuantity(1);
-  //   toast.info(addCartToast);
-  // };
-
   if (status === "loading" || auction === null) {
     return (
       <div className="flex justify-center items-center h-[100vh] flex-col">
-        {/* <img src={loading} alt="" /> */}
         <img src={logo} alt="" className="h-14" />
         <div id="lottie-container" className="w-28" />
-        {/* <div>loading</div> */}
       </div>
     );
   } else if (status === "not found") {
@@ -180,30 +170,21 @@ function FeedItem() {
     return (
       <>
         <Helmet>
-          <title>
-            {/* {auction.name} - {store.storeName} - Axion */}
-            Well Store - Axion
-          </title>
+          <title>Axion</title>
         </Helmet>
         <NavbarLayout />
 
         <div className="poppins">
           <button
-            className={`md:hidden flex gap-1 items-center font-medium cursor-pointer mb-3  ${
-              // store.colorTheme + "Nav"
-              "purpleNav"
-            } `}
+            className={`md:hidden flex gap-1 items-center font-medium cursor-pointer mb-3  ${"purpleNav"} `}
             onClick={() => navigate("/feed")}
           >
             <Icon icon="charm:chevron-left" width={20} />
             Back
           </button>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 my-6 gap-2 md:gap-6">
-            {/* <div className={`col-span-1 ${store.colorTheme + "-pg"}`}> */}
             <div className={`col-span-1 purple-pg`}>
               <img
-                // src={product.image}
-
                 src={
                   auction.product.image
                     ? "http://127.0.0.1:8080/" + auction.product.image
@@ -215,10 +196,7 @@ function FeedItem() {
             </div>
             <div className="col-span-1 p-5 flex flex-col gap-2">
               <button
-                className={`hidden md:flex gap-1 items-center font-medium cursor-pointer mb-3  ${
-                  // store.colorTheme + "Nav"
-                  "purpleNav"
-                } `}
+                className={`hidden md:flex gap-1 items-center font-medium cursor-pointer mb-3  ${"purpleNav"} `}
                 onClick={() => navigate("/feed")}
               >
                 <Icon icon="charm:chevron-left" width={20} />

@@ -83,7 +83,7 @@ function FeedFront() {
     return (
       <>
         <Helmet>
-          <title>Well Store - Axion</title>
+          <title>Axion</title>
         </Helmet>
 
         <nav className="flex 2xl:max-w-7xl 2xl:mx-auto 2xl:px-0 items-center justify-between bg-white z-[49] py-3 px-3 md:px-6 lg:px-16 border-b-gray-200 sticky top-0 border-b-[1px]">
@@ -101,17 +101,6 @@ function FeedFront() {
             />
           </div>
           <div className="flex items-center justify-between gap-8 md:gap-10">
-            <div className="relative cursor-pointer">
-              <div
-                className={
-                  "purple-btn w-5 h-5 rounded-full absolute -right-[10px] -top-2 text-xs p-2 text-white flex items-center justify-center"
-                }
-              >
-                {0}
-              </div>
-              <Icon icon="clarity:shopping-bag-line" width={28} />
-            </div>
-
             <CustomerProfile
               user={userAvailable ? user : null}
               color="purple"

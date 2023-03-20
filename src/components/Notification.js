@@ -6,7 +6,6 @@ function Notification() {
   return (
     <Menu className="relative" as="div">
       <Menu.Button className="flex hover:scale-105 transition-all ease-out duration-100 items-center cursor-pointer w-full">
-        {/* <img src={img} className="w-8 rounded-full" alt="profile img" /> */}
         <Icon
           icon="clarity:notification-outline-badged"
           width="22"
@@ -23,7 +22,6 @@ function Notification() {
               className={`px-3 py-2 flex gap-3 border-t-[1px] border-gray-200 ${
                 active && "bg-gray-100"
               }`}
-              // onClick={logoutHandler}
             >
               <div className="bg-purple-100 rounded-full p-2 text-purple-600">
                 <Icon icon="carbon:shopping-cart" width="18" />
@@ -41,7 +39,6 @@ function Notification() {
               className={`px-3 py-2 flex gap-3 border-t-[1px] border-gray-200 ${
                 active && "bg-gray-100"
               }`}
-              // onClick={logoutHandler}
             >
               <div className="bg-purple-100 rounded-full p-2 text-purple-600">
                 <Icon icon="carbon:shopping-cart" width="18" />

@@ -6,13 +6,10 @@ import { toast } from "react-toastify";
 import profile from "../assets/profile-picture.jpg";
 
 function CustomerProfile({ user, color }) {
-  // const setIsOpen = useSetRecoilState(checkoutModal);
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
     try {
-      // signOut(auth);
-
       localStorage.clear();
       navigate("/login");
       toast.info("Berhasil Logout");
@@ -22,7 +19,6 @@ function CustomerProfile({ user, color }) {
   };
 
   const loginHandler = () => {
-    // setIsOpen(true);
     navigate("/login");
   };
 
@@ -35,8 +31,6 @@ function CustomerProfile({ user, color }) {
       >
         {user ? (
           <img
-            // src={user.image}
-            // src="../assets/profile-picture.jpg"
             src={profile}
             className="w-8 h-8 rounded-full"
             alt="profile img"

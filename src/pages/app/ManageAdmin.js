@@ -10,28 +10,6 @@ import { options, optionsChart } from "../../components/SalesChart";
 import StatistikAngka from "../../components/StatistikAngka";
 import TopProduct from "../../components/TopProduct";
 import { getRequest } from "../../configs/axios";
-// const products = [
-//   {
-//     name: "Nike Air Jordan 1 Mid",
-//     sold: 23,
-//   },
-//   {
-//     name: "Swallow Indomaret",
-//     sold: 20,
-//   },
-//   {
-//     name: "A Bathing Ape",
-//     sold: 18,
-//   },
-//   {
-//     name: "Kaos Catur Bekasi",
-//     sold: 14,
-//   },
-//   {
-//     name: "Jaket Jamet Yoru",
-//     sold: 12,
-//   },
-// ];
 
 function ManageAdmin() {
   const location = useLocation();
@@ -52,7 +30,7 @@ function ManageAdmin() {
     datasets: [
       {
         label: "# of Votes",
-        // data: [12, 19],
+
         data: statusLabels,
         backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 99, 132, 0.2)"],
         borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
@@ -65,8 +43,6 @@ function ManageAdmin() {
     labels,
     datasets: [
       {
-        // data: [30000, 36000, 24000, 42000, 38000, 62000, 36000],
-        // data: dataBidders(),
         data: bidders,
         label: "New Auction",
         borderColor: "rgb(147, 51, 234)",
@@ -178,7 +154,6 @@ function ManageAdmin() {
   };
 
   useEffect(() => {
-    // if check kalo dia di path "/app" doang bukan di  "app/home"
     if (!location.pathname.includes("/home")) navigate("/app/home");
     setLoading(true);
     try {

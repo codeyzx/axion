@@ -43,18 +43,8 @@ function SidebarUser() {
       {/* Sidebar For Dekstop */}
       <nav className="pl-6 pr-2 py-7 justify-center h-screen border-r-[1px] w-full sidebarSticky border-r-gray-300 hidden md:flex">
         <div className="flex flex-col items-start w-full">
-          {/* Profile */}
-
-          {/* <SidebarProfile img={store.profileImg} name={store.storeName} /> */}
-
           <div className="flex items-center gap-2 w-full rounded">
-            {/* <img
-              src={store.profileImg}
-              className="w-12 h-12 rounded-full p-[2px] border-2 border-purple-600 object-cover"
-              alt=""
-            /> */}
             <p className="font-medium text-left lg:text-[15px]">
-              {/* {store.storeName} */}
               Auction Application
             </p>
           </div>

@@ -1,38 +1,38 @@
-import React from "react";
 import { Disclosure, Transition } from "@headlessui/react";
+import { Icon } from "@iconify/react";
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Icon } from "@iconify/react";
-import { Helmet } from "react-helmet-async";
 
 const faqItems = [
   {
-    title: "Apa itu Axion",
-    body: "Axion adalah sebuah online store builder, dengan axion pelaku usaha di Indonesia bisa membuat online storenya sendiri dengan mudah dan cepat.",
+    title: "What's axion",
+    body: "Axion is a simple auction application built with Go and React. It is a simple application that allows users to create auctions for products. Users can bid on auctions and the highest bidder wins the auction. The application also allows users to create products and auctions for those products.",
   },
   {
-    title: "Apakah axion berbayar?",
-    body: "Fitur-fitur pada aplikasi axion full gratis semuanya, misi kami dalam membuat aplikasi ini adalah memudahkan para umkm lokal agar bisa memasarkan produknya lebih luas dengan memberikan kemudahan dalam membuat online store kekinian dengan berbagai fitur serta tampilannya.",
+    title: "Is axion paid",
+    body: "The features on the full axion application are all free, our mission in making this application is to make it easier for local umkm to be able to market their products more broadly by providing convenience in making contemporary auctions with various features and appearance.",
   },
   {
-    title: "Apakah axion perlu tenaga teknis",
-    body: "Tidak, untuk membuat online store di axion anda hanya perlu menambah-nambahkan produk yang anda jual, untuk tampilan dan hal-hal lainnya sudah kami tangani sehingga anda tidak perlu pusing lagi.",
+    title: "Does axion need technical personnel",
+    body: "No, to create an auction in axion you just need to add the products you sell, for the appearance and other things we have handled so you don't need to bother anymore.",
   },
   {
-    title: "Bagaimana saya mengatur produk dan orderan?",
-    body: "Anda bisa login dan masuk sebagai admin toko anda, nantinya akan ada navigasi untuk mengarahkan ke page produk dan orderan dimana anda bisa mengatur hal-hal yang anda inginkan",
+    title: "How do I manage products and orders",
+    body: "You can log in and enter as the admin of your store, there will be navigation to direct you to the product and order pages where you can manage what you want.",
   },
   {
-    title: "Apakah saya bisa mengkostumisasi toko saya",
-    body: "Ya, di axion anda bisa melakukan berbagai kostumisasi pada toko anda mulai dari menambahkan link ke berbagai website anda, menambah bio, hingga mengatur tema warna toko anda.",
+    title: "Can I customize my store",
+    body: "Yes, in Axion you can make various customizations to your store, ranging from adding links to your various websites, adding a bio, to adjusting the color theme of your store.",
   },
   {
-    title: "Kenapa saya tidak mendapatkan email verifikasi",
-    body: "Anda bisa mengecek bagian spam di email anda apabila tidak menemukan email verifikasi, jika masih belum ada silahkan hubungi developer.",
+    title: "Why haven't I received a verification email",
+    body: "You can check your spam folder for the verification email, if you still haven't received it, please contact the developer.",
   },
   {
-    title: "Kemana saya bisa menghubungi apabila mengalami kesulitan",
-    body: "Anda bisa menghubungi developer lewat email axiondev@gmail.com atau juga bisa lewat link-link yang ada di bagian footer website ini.",
+    title: "Where can I contact if I have difficulty",
+    body: "You can contact the developer via email at yahyatruth@gmail.com or through the links in the footer of this website.",
   },
 ];
 

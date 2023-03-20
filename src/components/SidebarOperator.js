@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import SidebarItem from "./SidebarItem";
-import logo from "../assets/axionLogo.svg";
 import { useSetRecoilState } from "recoil";
+import logo from "../assets/axionLogo.svg";
 import { navbarAdmin } from "../atoms/navbarAdmin";
+import SidebarItem from "./SidebarItem";
 
 const sidebarItems = [
   {
@@ -29,9 +29,6 @@ function SidebarOperator() {
       <nav className="pl-6 pr-2 py-7 justify-center h-screen border-r-[1px] w-full sidebarSticky border-r-gray-300 hidden md:flex">
         <div className="flex flex-col items-start w-full">
           {/* Profile */}
-
-          {/* <SidebarProfile img={store.profileImg} name={store.storeName} /> */}
-
           <div className="flex items-center gap-2 w-full rounded">
             <p className="font-medium text-left lg:text-[15px]">Operator</p>
           </div>

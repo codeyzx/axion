@@ -142,7 +142,7 @@ function User() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadPDF}
                     >
@@ -155,7 +155,7 @@ function User() {
                   {({ active }) => (
                     <button
                       className={` px-3 py-[6px] flex gap-2  ${
-                        active && "bg-gray-100 text-red-500"
+                        active && "bg-gray-100 text-green-500"
                       }`}
                       onClick={downloadExcel}
                     >
