@@ -169,7 +169,7 @@ function ManageAdmin() {
   return (
     <>
       <Helmet>
-        <title>Home | Merchain</title>
+        <title>Home | Axion</title>
       </Helmet>
 
       <NavbarAdmin user={user} />
