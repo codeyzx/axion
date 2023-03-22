@@ -241,7 +241,10 @@ function EditProduct() {
                     ) : (
                       <>
                         <img
-                          src={"http://127.0.0.1:8080/" + product?.image}
+                          src={
+                            "https://axion-be-production.up.railway.app/" +
+                            product?.image
+                          }
                           alt="img placeholder"
                           className="w-32"
                         />

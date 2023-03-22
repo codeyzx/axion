@@ -42,7 +42,7 @@ export function customAxios(method, url, data, headers) {
     url: url,
     data: data,
     headers: mapHeaders,
-    baseURL: "http://127.0.0.1:8080/",
+    baseURL: "https://axion-be-production.up.railway.app/",
     timeout: 2000,
     withCredentials: true,
   }).then((response) => response);
@@ -57,7 +57,7 @@ export function downloadRequest(URL, headers) {
       accept: "application/json",
       Authorization: headers,
     },
-    baseURL: "http://127.0.0.1:8080/",
+    baseURL: "https://axion-be-production.up.railway.app/",
     timeout: 2000,
     withCredentials: true,
     responseType: "blob",

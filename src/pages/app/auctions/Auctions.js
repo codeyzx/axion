@@ -138,7 +138,7 @@ function Auctions() {
               Cell: ({ cell: { value } }) =>
                 value !== "" ? (
                   <img
-                    src={"http://127.0.0.1:8080/" + value}
+                    src={"https://axion-be-production.up.railway.app/" + value}
                     alt="productImg"
                     className="h-16 w-16 object-cover"
                   />
@@ -213,7 +213,7 @@ function Auctions() {
               Cell: ({ cell: { value } }) =>
                 value !== "" ? (
                   <img
-                    src={"http://127.0.0.1:8080/" + value}
+                    src={"https://axion-be-production.up.railway.app/" + value}
                     alt="productImg"
                     className="h-16 w-16 object-cover"
                   />
