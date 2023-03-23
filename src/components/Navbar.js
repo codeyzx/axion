@@ -60,7 +60,7 @@ function Navbar() {
           Feed
         </NavLink>
         <NavLink
-          to="/feed"
+          to="/faq"
           className={({ isActive }) =>
             isActive
               ? "font-semibold text-purple-600"
