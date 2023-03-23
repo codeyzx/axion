@@ -69,7 +69,7 @@ function OperatorLayout() {
   } else {
     return (
       <>
-        <MobileAdminModal />
+        <MobileAdminModal user={user} />
         <div className="flex flex-col  md:grid md:grid-cols-11 bg-[#F4F4F5]">
           <nav className="md:col-span-2 bg-white">
             <Sidebar />

@@ -94,10 +94,10 @@ function Home() {
             </div>
           </div>
           <Link
-            to="/signup"
+            to="/feed"
             className="mt-12 p-5 inline-block bg-purple-600 text-white rounded-md hover:bg-purple-700 font-medium text-lg lg:text-xl"
           >
-            Try It Now !!
+            Explore Feed !!
           </Link>
         </div>
       </div>
