@@ -11,8 +11,8 @@ function Footer() {
         <Link to="/faq" className="hover:text-purple-600">
           FAQ
         </Link>
-        <Link to="/login" className="hover:text-purple-600">
-          Login
+        <Link to="/feed" className="hover:text-purple-600">
+          Feed
         </Link>
       </div>
       <div className="flex items-center gap-6 w-full lg:justify-end">

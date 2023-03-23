@@ -22,6 +22,16 @@ function CustomerProfile({ user, color }) {
     navigate("/login");
   };
 
+  const path = () => {
+    var entity = "";
+    if (user["role"].toLowerCase() === "users") {
+      entity = "app";
+    } else {
+      entity = user["role"].toLowerCase();
+    }
+    return "/" + entity + "/home";
+  };
+
   return (
     <Menu className="relative" as="div">
       <Menu.Button
@@ -48,10 +58,10 @@ function CustomerProfile({ user, color }) {
                   className={` px-3 py-[6px] flex gap-2 ${
                     active && "bg-gray-100"
                   }`}
-                  to="/order-status"
+                  to={path()}
                 >
                   <Icon icon="ep:price-tag" width="18" />
-                  <p>Pesanan Kamu</p>
+                  <p>Your Dashboard</p>
                 </Link>
               )}
             </Menu.Item>

@@ -50,7 +50,17 @@ function Navbar() {
 
       <div className="items-center justify-between gap-10 hidden md:flex">
         <NavLink
-          to="/faq"
+          to="/feed"
+          className={({ isActive }) =>
+            isActive
+              ? "font-semibold text-purple-600"
+              : "font-semibold hover:text-purple-600"
+          }
+        >
+          Feed
+        </NavLink>
+        <NavLink
+          to="/feed"
           className={({ isActive }) =>
             isActive
               ? "font-semibold text-purple-600"

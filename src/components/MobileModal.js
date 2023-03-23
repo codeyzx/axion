@@ -55,11 +55,11 @@ function MobileModal() {
               <p>Login</p>
             </Link>
             <Link
-              to="/signup"
+              to="/feed"
               onClick={() => setIsOpen(false)}
               className="rounded-3xl flex items-center justify-center mt-3 p-2 text-[15px]  font-medium bg-purple-500 text-white"
             >
-              <p>Coba Sekarang - Gratis</p>
+              <p>Explore Feed</p>
             </Link>
           </div>
         </Dialog.Panel>

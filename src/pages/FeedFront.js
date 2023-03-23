@@ -155,7 +155,8 @@ function FeedFront() {
                         price={rupiahConverter(auction.last_price.toString())}
                         img={
                           auction.product.image
-                            ? "http://127.0.0.1:8080/" + auction.product.image
+                            ? "https://axion-be-production.up.railway.app/" +
+                              auction.product.image
                             : "https://via.placeholder.com/350x150"
                         }
                         desc={auction.product.name}

@@ -9,13 +9,59 @@ import SidebarItem from "./SidebarItem";
 const sidebarItems = [
   {
     itemName: "Home",
+    itemPath: "/admin/home",
+    icon: "carbon:home",
+  },
+  {
+    itemName: "Auctions",
+    itemPath: "/admin/auctions",
+    icon: "carbon:money",
+  },
+  {
+    itemName: "Transactions",
+    itemPath: "/admin/transactions",
+    icon: "carbon:shopping-cart",
+  },
+  {
+    itemName: "Products",
+    itemPath: "/admin/products",
+    icon: "carbon:tag",
+  },
+  {
+    itemName: "History",
+    itemPath: "/admin/history",
+    icon: "carbon:watch",
+  },
+  {
+    itemName: "Users",
+    itemPath: "/admin/users",
+    icon: "bi:people",
+  },
+];
+
+const sidebarItemsOperator = [
+  {
+    itemName: "Home",
+    itemPath: "/operator/home",
+    icon: "carbon:home",
+  },
+  {
+    itemName: "Auctions",
+    itemPath: "/operator/auctions",
+    icon: "carbon:money",
+  },
+];
+
+const sidebarItemsUser = [
+  {
+    itemName: "Home",
     itemPath: "/app/home",
     icon: "carbon:home",
   },
   {
-    itemName: "Orders",
-    itemPath: "/app/orders",
-    icon: "carbon:shopping-cart",
+    itemName: "Auctions",
+    itemPath: "/app/auctions",
+    icon: "carbon:money",
   },
   {
     itemName: "Products",
@@ -23,9 +69,9 @@ const sidebarItems = [
     icon: "carbon:tag",
   },
   {
-    itemName: "Customers",
-    itemPath: "/app/customers",
-    icon: "bi:people",
+    itemName: "Transactions",
+    itemPath: "/app/transactions",
+    icon: "carbon:shopping-cart",
   },
   {
     itemName: "Settings",
@@ -34,16 +80,13 @@ const sidebarItems = [
   },
 ];
 
-function MobileAdminModal() {
+function MobileAdminModal({ user }) {
   const [isOpen, setIsOpen] = useRecoilState(navbarAdmin);
   const locationNow = useLocation();
-  const nav = useNavigate();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
     try {
-      
-
       localStorage.clear();
       navigate("/login");
     } catch (err) {
@@ -71,23 +114,38 @@ function MobileAdminModal() {
           </Dialog.Title>
           <div className="w-full my-5 gap-6 flex flex-col">
             {/* Sidebar Item */}
-            {sidebarItems.map((item, i) => (
-              <div key={i} onClick={() => setIsOpen(false)}>
-                <SidebarItem
-                  locationNow={locationNow}
-                  itemPath={item.itemPath}
-                  itemName={item.itemName}
-                  icon={item.icon}
-                />
-              </div>
-            ))}
-            <button
-              onClick={() => nav(`/nyoba`)}
-              className="sidebarItem bg-purple-100 rounded border-[1px] border-purple-600 text-purple-800 font-semibold"
-            >
-              <Icon icon="akar-icons:eye" width={22} />
-              <p>Kunjungi Toko</p>
-            </button>
+            {user.role.toLowerCase() === "admin"
+              ? sidebarItems.map((item, i) => (
+                  <div key={i} onClick={() => setIsOpen(false)}>
+                    <SidebarItem
+                      locationNow={locationNow}
+                      itemPath={item.itemPath}
+                      itemName={item.itemName}
+                      icon={item.icon}
+                    />
+                  </div>
+                ))
+              : user.role.toLowerCase() === "operator"
+              ? sidebarItemsOperator.map((item, i) => (
+                  <div key={i} onClick={() => setIsOpen(false)}>
+                    <SidebarItem
+                      locationNow={locationNow}
+                      itemPath={item.itemPath}
+                      itemName={item.itemName}
+                      icon={item.icon}
+                    />
+                  </div>
+                ))
+              : sidebarItemsUser.map((item, i) => (
+                  <div key={i} onClick={() => setIsOpen(false)}>
+                    <SidebarItem
+                      locationNow={locationNow}
+                      itemPath={item.itemPath}
+                      itemName={item.itemName}
+                      icon={item.icon}
+                    />
+                  </div>
+                ))}
             <button
               onClick={logoutHandler}
               className="sidebarItem bg-red-100 rounded border-[1px] border-red-600 text-red-800 font-semibold"
