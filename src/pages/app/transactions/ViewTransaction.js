@@ -120,7 +120,7 @@ function ViewTransaction() {
                   <div className="border-gray-300 border-[1px] w-fit hover:border-purple-600 p-4 items-center my-2 rounded flex flex-col gap-4 cursor-pointer">
                     <img
                       src={
-                        "https://axion-be-production.up.railway.app/" +
+                        "http://127.0.0.1:8080/" +
                         transaction?.auction.product.image
                       }
                       alt="img placeholder"

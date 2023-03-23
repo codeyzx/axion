@@ -96,7 +96,7 @@ function Products() {
         Cell: ({ cell: { value } }) =>
           value !== "" ? (
             <img
-              src={"https://axion-be-production.up.railway.app/" + value}
+              src={"http://127.0.0.1:8080/" + value}
               alt="productImg"
               className="h-16 w-16 object-cover"
             />
