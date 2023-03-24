@@ -63,12 +63,16 @@ function ManageAdmin() {
 
         setAuctions(filteredData);
 
-        const convertedData = filteredData.map((auction) => {
-          return {
-            name: auction.name,
-            sold: auction.bidders_count,
-          };
-        });
+        const convertedData = filteredData
+          .filter((auction) => {
+            return auction.status.toLowerCase() === "open";
+          })
+          .map((auction) => {
+            return {
+              name: auction.name,
+              sold: auction.bidders_count,
+            };
+          });
 
         const data = convertedData.slice(0, 5);
         setAuction(data);
