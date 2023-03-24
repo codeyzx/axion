@@ -120,7 +120,11 @@ function FeedFront() {
                       setAuctions([...auctions]);
                       break;
                     case "3":
-                      auctions.sort((a, b) => b.id - a.id);
+                      auctions.sort(function (a, b) {
+                        var dateA = new Date(a.end_at),
+                          dateB = new Date(b.end_at);
+                        return dateB - dateA;
+                      });
                       setAuctions(null);
                       setAuctions([...auctions]);
                       break;
@@ -131,7 +135,7 @@ function FeedFront() {
               >
                 <option value={1}>Best Fit</option>
                 <option value={2}>Highest Price</option>
-                <option value={3}>Newest</option>
+                <option value={3}>Longest Time</option>
               </select>
             </div>
             <div className="-translate-y-100 max-w-7xl 2xl:mx-auto 2xl:grid-cols-4 mt-50 md:mt-10 mx-2 lg:mx-20 xl:mx-36 px-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-x-8 md:gap-y-6">
@@ -155,8 +159,7 @@ function FeedFront() {
                         price={rupiahConverter(auction.last_price.toString())}
                         img={
                           auction.product.image
-                            ? "https://axion-be-production.up.railway.app/" +
-                              auction.product.image
+                            ? "http://127.0.0.1:8080/" + auction.product.image
                             : "https://via.placeholder.com/350x150"
                         }
                         desc={auction.product.name}

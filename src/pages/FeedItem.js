@@ -186,8 +186,7 @@ function FeedItem() {
               <img
                 src={
                   auction.product.image
-                    ? "https://axion-be-production.up.railway.app/" +
-                      auction.product.image
+                    ? "http://127.0.0.1:8080/" + auction.product.image
                     : "https://via.placeholder.com/350x150"
                 }
                 className="w-[400px] mx-auto h-[460px] object-cover"
@@ -257,7 +256,8 @@ function FeedItem() {
                 <button
                   className={`p-[10px] rounded-full font-semibold text-xl text-white ${
                     dayjs(auction.end_at).isAfter(dayjs()) &&
-                    auction.status.toLowerCase() === "open"
+                    auction.status.toLowerCase() === "open" &&
+                    auction.user.id !== user.id
                       ? "purple"
                       : "gray"
                   }-btn`}
@@ -265,7 +265,8 @@ function FeedItem() {
                   disabled={
                     loading ||
                     dayjs(auction.end_at).isBefore(dayjs()) ||
-                    auction.status.toLowerCase() !== "open"
+                    auction.status.toLowerCase() !== "open" ||
+                    auction.user.id === user.id
                       ? true
                       : false
                   }
