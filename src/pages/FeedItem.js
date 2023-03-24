@@ -253,26 +253,36 @@ function FeedItem() {
                   </button>
                 </div>
 
-                <button
-                  className={`p-[10px] rounded-full font-semibold text-xl text-white ${
-                    dayjs(auction.end_at).isAfter(dayjs()) &&
-                    auction.status.toLowerCase() === "open" &&
-                    auction.user.id !== user.id
-                      ? "purple"
-                      : "gray"
-                  }-btn`}
-                  onClick={() => bidHandler()}
-                  disabled={
-                    loading ||
-                    dayjs(auction.end_at).isBefore(dayjs()) ||
-                    auction.status.toLowerCase() !== "open" ||
-                    auction.user.id === user.id
-                      ? true
-                      : false
-                  }
-                >
-                  Bid
-                </button>
+                {user === null ? (
+                  <button
+                    className={`p-[10px] rounded-full font-semibold text-xl text-white gray-btn`}
+                    onClick={() => bidHandler()}
+                    disabled={true}
+                  >
+                    Bid
+                  </button>
+                ) : (
+                  <button
+                    className={`p-[10px] rounded-full font-semibold text-xl text-white ${
+                      dayjs(auction.end_at).isAfter(dayjs()) &&
+                      auction.status.toLowerCase() === "open" &&
+                      auction.user.id !== user.id
+                        ? "purple"
+                        : "gray"
+                    }-btn`}
+                    onClick={() => bidHandler()}
+                    disabled={
+                      loading ||
+                      dayjs(auction.end_at).isBefore(dayjs()) ||
+                      auction.status.toLowerCase() !== "open" ||
+                      auction.user.id === user.id
+                        ? true
+                        : false
+                    }
+                  >
+                    Bid
+                  </button>
+                )}
               </div>
             </div>
           </div>
