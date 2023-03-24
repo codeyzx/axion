@@ -256,7 +256,8 @@ function FeedItem() {
                 <button
                   className={`p-[10px] rounded-full font-semibold text-xl text-white ${
                     dayjs(auction.end_at).isAfter(dayjs()) &&
-                    auction.status.toLowerCase() === "open"
+                    auction.status.toLowerCase() === "open" &&
+                    auction.user.id !== user.id
                       ? "purple"
                       : "gray"
                   }-btn`}
@@ -264,7 +265,8 @@ function FeedItem() {
                   disabled={
                     loading ||
                     dayjs(auction.end_at).isBefore(dayjs()) ||
-                    auction.status.toLowerCase() !== "open"
+                    auction.status.toLowerCase() !== "open" ||
+                    auction.user.id === user.id
                       ? true
                       : false
                   }
