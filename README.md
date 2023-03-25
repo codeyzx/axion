@@ -53,6 +53,6 @@ Axion is a platform that offers a simple and efficient way to conduct online auc
 - Railway
 - D2
 
-## Try It Now
+## About the Project
 
-[Axion](https://axion-ruby.vercel.app/)
+Project ini bertujuan untuk memenuhi `UJI KOMPETENSI KEAHLIAN REKAYASA PERANGKAT LUNAK TAHUN PELAJARAN 2022/2023` dengan judul tugas `Sistem Lelang Online` pada `paket 4`.
