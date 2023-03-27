@@ -203,7 +203,7 @@ function FeedItem() {
               </button>
               <h5 className="text-3xl font-semibold">{auction.name}</h5>
               <div className="flex flex-row justify-between my-1">
-                <p className="text-sm">Bidders Total {auction.bidders_count}</p>
+                <p className="text-sm">Bidders Total {auction.auction_history.length}</p>
                 <p className="text-sm">
                   End at: {dayjs(auction.end_at).format("DD MMMM YYYY hh:mm")}
                 </p>
