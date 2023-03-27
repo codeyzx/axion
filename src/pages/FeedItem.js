@@ -187,7 +187,7 @@ function FeedItem() {
                 src={
                   auction.product.image
                     ? "https://axion-be-production.up.railway.app/" +
-                      auction.product.image
+                    auction.product.image
                     : "https://via.placeholder.com/350x150"
                 }
                 className="w-[400px] mx-auto h-[460px] object-cover"
@@ -204,7 +204,7 @@ function FeedItem() {
               </button>
               <h5 className="text-3xl font-semibold">{auction.name}</h5>
               <div className="flex flex-row justify-between my-1">
-                <p className="text-sm">Bidders Total {auction.bidders_count}</p>
+                <p className="text-sm">Bidders Total {auction.auction_history.length}</p>
                 <p className="text-sm">
                   End at: {dayjs(auction.end_at).format("DD MMMM YYYY hh:mm")}
                 </p>
@@ -264,19 +264,18 @@ function FeedItem() {
                   </button>
                 ) : (
                   <button
-                    className={`p-[10px] rounded-full font-semibold text-xl text-white ${
-                      dayjs(auction.end_at).isAfter(dayjs()) &&
-                      auction.status.toLowerCase() === "open" &&
-                      auction.user.id !== user.id
+                    className={`p-[10px] rounded-full font-semibold text-xl text-white ${dayjs(auction.end_at).isAfter(dayjs()) &&
+                        auction.status.toLowerCase() === "open" &&
+                        auction.user.id !== user.id
                         ? "purple"
                         : "gray"
-                    }-btn`}
+                      }-btn`}
                     onClick={() => bidHandler()}
                     disabled={
                       loading ||
-                      dayjs(auction.end_at).isBefore(dayjs()) ||
-                      auction.status.toLowerCase() !== "open" ||
-                      auction.user.id === user.id
+                        dayjs(auction.end_at).isBefore(dayjs()) ||
+                        auction.status.toLowerCase() !== "open" ||
+                        auction.user.id === user.id
                         ? true
                         : false
                     }
