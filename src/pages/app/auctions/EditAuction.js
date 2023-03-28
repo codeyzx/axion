@@ -36,7 +36,10 @@ function EditAuction() {
   const getAuction = async () => {
     await getRequest("auctions/" + id, token)
       .then((res) => {
-        setAuction(res.data["data"]);
+        const data = res.data["data"];
+        const endAt = data.end_at;
+        data.end_at = endAt.slice(0, -1);
+        setAuction(data);
       })
       .catch((err) => {
         console.log(err);
